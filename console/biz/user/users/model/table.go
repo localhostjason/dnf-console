@@ -19,6 +19,8 @@ type User struct {
 	Role  string `json:"role"`
 	Email string `json:"email" gorm:"type:string;size:64"`
 	Desc  string `json:"desc" gorm:"type:string;size:256"`
+
+	IsSuperAdmin bool `json:"is_super_admin"`
 }
 
 func (u *User) SetPassword(password string) {

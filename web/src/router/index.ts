@@ -2,7 +2,8 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { LAYOUT } from '@/router/constant'
 import { AppRouteRecordRaw } from '@/router/types'
 
-import UserRoutes from './modules/user'
+import Gm from './modules/gm'
+import SystemRoutes from './modules/system'
 
 /**
  * Note: sub-menu only appear when route children. Length >= 1
@@ -74,7 +75,7 @@ export const basicRoutes: Array<AppRouteRecordRaw> = [
   }
 ]
 
-export const asyncRoutes = [...UserRoutes]
+export const asyncRoutes = [...Gm, ...SystemRoutes]
 
 const r = basicRoutes.concat(asyncRoutes)
 

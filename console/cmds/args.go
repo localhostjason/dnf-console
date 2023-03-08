@@ -1,6 +1,7 @@
 package cmds
 
 import (
+	"console/mods/game_db"
 	"flag"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -55,12 +56,21 @@ func (m *MainServer) Run() {
 			fmt.Println("error when sync db schema", err)
 			return
 		}
+		if err := game_db.SyncDB(); err != nil {
+			fmt.Println("error when sync game db schema", err)
+			return
+		}
+
 		fmt.Println("success: sync db schema")
 		return
 	}
 
 	if err := AutoMigrate(); err != nil {
 		fmt.Println("error when migrate db schema", err)
+		return
+	}
+	if err := game_db.AutoMigrate(); err != nil {
+		fmt.Println("error when migrate game db schema", err)
 		return
 	}
 

@@ -25,25 +25,8 @@ export const getUsersList = async (): Promise<User[]> => {
       time: '2023-02-09T14:41:19.3067481+08:00',
       role: 'admin',
       email: '',
-      desc: '系统管理员'
-    },
-    {
-      id: 2,
-      username: 'security',
-      last_login_time: null,
-      time: '2023-02-09T14:41:19.3067481+08:00',
-      role: 'security',
-      email: '',
-      desc: '安全管理员'
-    },
-    {
-      id: 3,
-      username: 'auditor',
-      last_login_time: null,
-      time: '2023-02-09T14:41:19.3067481+08:00',
-      role: 'auditor',
-      email: '',
-      desc: '审计管理员'
+      desc: '系统管理员',
+      is_super_admin: true
     }
   ]
 }

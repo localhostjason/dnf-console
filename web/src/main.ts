@@ -6,6 +6,7 @@ import store from './store'
 
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import locale from 'element-plus/lib/locale/lang/zh-cn'
 
 import * as ElIcon from '@element-plus/icons-vue'
 
@@ -18,7 +19,6 @@ import 'normalize.css/normalize.css'
 import './styles/index.scss'
 
 // init
-
 ;(async () => {
   const app = createApp(App)
 
@@ -30,7 +30,8 @@ import './styles/index.scss'
 
   // load element plus ui
   app.use(ElementPlus, {
-    size: 'default'
+    size: 'default',
+    locale
   })
   for (const iconName in ElIcon) {
     app.component(iconName, ElIcon[iconName])
@@ -41,7 +42,6 @@ import './styles/index.scss'
 
   // load svg组件
   app.component('svg-icon', SvgIcon)
-
 
   app.mount('#app', true)
 })()

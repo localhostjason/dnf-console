@@ -3,7 +3,6 @@
     <panel-title title="用户管理"></panel-title>
 
     <el-row>
-      <el-button type="primary" @click="download">下载</el-button>
       <el-button type="primary" @click="createUser">创建</el-button>
     </el-row>
     <el-row>
@@ -23,8 +22,13 @@
         <el-table-column prop="desc" label="描述" />
         <el-table-column label="操作" width="160">
           <template #default="scope">
-            <el-button type="primary" plain size="small" @click="editUser(scope.row)">编辑</el-button>
-            <el-button type="danger" size="small" @click="deleteUser(scope.row)">删除</el-button>
+            <el-button type="text" @click="editUser(scope.row)">编辑</el-button>
+
+            <el-tooltip content="超级管理员不支持删除" placement="top">
+              <el-button type="text" @click="deleteUser(scope.row)" :disabled="scope.row.is_super_admin">
+                删除
+              </el-button>
+            </el-tooltip>
           </template>
         </el-table-column>
       </el-table>

@@ -6,6 +6,7 @@ export type User = {
   email: string
   role: string
   desc: string
+  is_super_admin: boolean
 }
 
 export type UserState = {

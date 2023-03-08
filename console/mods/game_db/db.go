@@ -34,12 +34,12 @@ func DBEnable() bool {
 	return c.Enable
 }
 
-var tableModels []interface{}
+var tableModels = make(map[any][]interface{})
 
 // Migrate 初始化或升级表结构
 func Migrate() error {
 	DBPools.Range(func(k, db any) bool {
-		if err := db.(*gorm.DB).AutoMigrate(tableModels...); err != nil {
+		if err := db.(*gorm.DB).AutoMigrate(tableModels[k]...); err != nil {
 			log.Fatalln("failed to migrate database:", k, ",err:", err)
 			return false
 		}
@@ -50,8 +50,8 @@ func Migrate() error {
 }
 
 // RegTables 其他模块注册需要访问的表, 会被自动创建
-func RegTables(tables ...interface{}) {
-	tableModels = append(tableModels, tables...)
+func RegTables(k any, tables ...interface{}) {
+	tableModels[k] = append(tableModels[k], tables...)
 }
 
 type InitDataHandler func() error

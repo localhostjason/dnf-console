@@ -24,11 +24,12 @@ func InitUser() error {
 	now := time.Now()
 	users := []model.User{
 		{
-			Username: "admin",
-			Role:     ADMIN,
-			Email:    "",
-			Desc:     "系统管理员",
-			Time:     now,
+			Username:     "admin",
+			Role:         ADMIN,
+			Email:        "",
+			Desc:         "超级管理员",
+			Time:         now,
+			IsSuperAdmin: true,
 		},
 	}
 
