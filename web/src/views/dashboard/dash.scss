@@ -1,0 +1,19 @@
+.dash-panel {
+  padding: 18px 0;
+
+  .dash-border {
+    height: 210px;
+
+    .card-panel {
+      margin: 90px 0 0 0;
+      -webkit-transition: all 0.38s ease-out;
+      transition: all 0.38s ease-out;
+      border-radius: 6px;
+
+      .card-panel-icon {
+        font-size: 78px;
+        color: #34bfa3;
+      }
+    }
+  }
+}

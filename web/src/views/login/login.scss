@@ -1,0 +1,119 @@
+$bg: #283443;
+$light_gray: #eee;
+$cursor: #909399;
+
+@supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
+  .login-container .el-input input {
+    color: $cursor;
+
+    // &::first-line {
+    //   color: $light_gray;
+    // }
+  }
+}
+
+/* reset element-ui css */
+.login-container {
+  .el-input {
+
+
+    input {
+      border: 0;
+      -webkit-appearance: none;
+      border-radius: 0;
+      padding: 12px 5px 12px 6px;
+      color: black;
+      height: 40px;
+      caret-color: $cursor;
+      font-size: 14px;
+
+      &::-webkit-input-placeholder {
+        color: #bbbcbf;
+      }
+
+      // &:-webkit-autofill {
+      //   -webkit-box-shadow: 0 0 0 1000px $bg inset !important;
+      //   -webkit-text-fill-color: $cursor !important;
+      // }
+    }
+  }
+
+  .el-form-item {
+    margin-bottom: 28px;
+  }
+
+  .el-form-item__error {
+    padding-top: 7px;
+    left: 7px;
+  }
+}
+
+.login-container {
+  .login-form {
+    margin: 80px auto;
+    padding-right: 60px;
+  }
+
+  .title-container {
+    position: relative;
+
+    .title {
+      font-size: 28px;
+      color: #2d3036;
+      margin: 0 auto 65px auto;
+      text-align: center;
+      font-weight: normal;
+    }
+
+    .set-language {
+      color: #fff;
+      position: absolute;
+      top: 5px;
+      right: 0;
+    }
+  }
+
+  .show-pwd {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    font-size: 16px;
+     color: #889aa4;
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+.login-logo {
+  height: 80px;
+  padding: 20px;
+}
+
+.login-content {
+  position: relative;
+  top: 25%;
+  height: 420px;
+  width: 900px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+.login-content-long-title {
+  position: relative;
+  top: 20%;
+  height: 474px;
+  width: 1170px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+.login-btn {
+  width: 100%;
+  margin-top: 32px;
+  font-size: 18px;
+  border-radius: 2px;
+  height: 48px;
+  background-color: #0078fc;
+}
