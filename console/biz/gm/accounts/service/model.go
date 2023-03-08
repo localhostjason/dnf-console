@@ -8,8 +8,9 @@ import (
 
 type AccountResult struct {
 	model.Accounts
-	Roles int64 `json:"roles"`
-	Money any   `json:"money"`
+	Roles    int64 `json:"roles"`
+	Money    int   `json:"money"`
+	Capacity int   `json:"capacity"`
 }
 
 type AccountFilter struct {

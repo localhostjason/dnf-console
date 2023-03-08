@@ -19,12 +19,13 @@ func GetAccounts(q *AccountFilter, pi *uv.PagingIn, order *uv.Order) ([]AccountR
 	for _, info := range lst {
 		roles := getGameRolesByUid(info.Uid)
 
-		money := getGameMoneyByUid(info.Uid)
+		money, capacity := getGameMoneyByUid(info.Uid)
 
 		data = append(data, AccountResult{
 			Accounts: info,
 			Roles:    roles,
 			Money:    money,
+			Capacity: capacity,
 		})
 	}
 
@@ -39,18 +40,19 @@ func getGameRolesByUid(uid int) int64 {
 	return total
 }
 
-func getGameMoneyByUid(uid int) any {
+func getGameMoneyByUid(uid int) (int, int) {
 	dbx := game_db.DBPools.Get(model.AccountDetailDbKey)
 	type _R struct {
 		Money    int `json:"money"`
 		Capacity int `json:"capacity"`
 	}
 
-	result := map[string]interface{}{}
+	var result _R
 	err := dbx.Debug().Table("account_cargo").Where("m_id = ?", uid).Take(&result).Error
 
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return 0
+		return 0, 0
 	}
-	return result["money"]
+
+	return result.Money, result.Capacity
 }
