@@ -21,3 +21,7 @@ export type AccountState = {
 }
 
 export type ModifyAccountForm = {}
+
+export type FilterAccountForm = {
+  uid: string
+}

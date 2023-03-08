@@ -8,9 +8,9 @@ import (
 	"gorm.io/gorm"
 )
 
-func GetAccounts(pi *uv.PagingIn, order *uv.Order) ([]AccountResult, *uv.PagingOut, error) {
+func GetAccounts(q *AccountFilter, pi *uv.PagingIn, order *uv.Order) ([]AccountResult, *uv.PagingOut, error) {
 	dbx := game_db.DBPools.Get(model.AccountDbKey)
-	tx := dbx.Model(&model.Accounts{})
+	tx := q.FilterQuery(dbx)
 
 	var lst = make([]model.Accounts, 0)
 	po, err := uv.PagingFind(tx, &lst, pi, order)

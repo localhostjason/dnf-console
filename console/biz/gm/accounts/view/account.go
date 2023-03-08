@@ -7,9 +7,9 @@ import (
 )
 
 func getAccounts(c *gin.Context) {
-	var pi, order = &uv.PagingIn{}, &uv.Order{}
-	uv.PQ(c, pi, order)
-	lst, po, err := service.GetAccounts(pi, order)
+	var pi, order, q = &uv.PagingIn{}, &uv.Order{}, &service.AccountFilter{}
+	uv.PQ(c, pi, order, q)
+	lst, po, err := service.GetAccounts(q, pi, order)
 	uv.PEIf(E_ACCOUNT_GET, err)
 
 	c.JSON(200, uv.PagedOut(lst, po))

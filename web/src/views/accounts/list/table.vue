@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { getAccounts } from '@/api/gm/accounts'
 import { reactive } from 'vue'
-import { AccountState } from '@/views/accounts/list/model'
+import { AccountState, FilterAccountForm } from '@/views/accounts/list/model'
 import { PageQuery } from '@/models/page'
 
 // define
@@ -54,7 +54,9 @@ const pageQuery = reactive<PageQuery>({
   per_page: 10
 })
 
-const argQuery = reactive({})
+let argQuery = reactive<FilterAccountForm>({
+  uid: ''
+})
 
 const getAccountList = async () => {
   state.loading = true
@@ -79,6 +81,11 @@ const handleCurrentChange = (params_page: number) => {
   getAccountList()
 }
 
+const setParams = (data: FilterAccountForm) => {
+  argQuery = data
+  getAccountList()
+}
+
 function formatPrice(price) {
   try {
     return String(price).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -89,6 +96,10 @@ function formatPrice(price) {
 
 // hook
 getAccountList() // created
+
+defineExpose({
+  setParams
+})
 </script>
 
 <style scoped></style>
