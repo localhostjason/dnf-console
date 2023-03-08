@@ -6,7 +6,13 @@
     <el-row>
       <el-table v-loading="state.loading" :data="state.data" ref="tableRef" border>
         <el-table-column prop="uid" label="UID" width="180" />
-        <el-table-column prop="account_name" label="账号名" width="180" />
+        <el-table-column prop="account_name" label="账号名" width="200" />
+        <el-table-column prop="roles" label="创建角色总数" width="120" align="center" />
+        <el-table-column prop="money" label="携带金钱" width="180">
+          <template #default="scope">
+            <span>{{ formatPrice(scope.row.money) }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" align="right">
           <template #default="scope">
             <el-button type="text">修改密码</el-button>
@@ -71,6 +77,14 @@ const handleSizeChange = (params_limit: number) => {
 const handleCurrentChange = (params_page: number) => {
   pageQuery.page = params_page
   getAccountList()
+}
+
+function formatPrice(price) {
+  try {
+    return String(price).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  } catch (e) {
+    return price
+  }
 }
 
 // hook

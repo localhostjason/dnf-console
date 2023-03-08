@@ -2,6 +2,8 @@ export type AccountDetail = {
   uid: number
   account_name: string
   qqq: string
+  roles: number
+  money: any
 }
 
 export type Account = {
