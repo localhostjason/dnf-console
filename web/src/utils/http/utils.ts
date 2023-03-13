@@ -49,6 +49,10 @@ const httpResponseMessageByCode = (code: number, errMsg: string): string => {
       message = '相关的资源不存在'
       break
 
+    case 400:
+      message = errMsg
+      break
+
     case 401:
       message = errMsg
       break
