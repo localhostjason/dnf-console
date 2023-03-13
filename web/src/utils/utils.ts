@@ -34,3 +34,13 @@ export const getFormDataByFields = (fields: any, keys: string[]): object => {
   }
   return data
 }
+
+export function getIdFormArray(val, field = 'id') {
+  let result = []
+  if (val && val.length) {
+    for (const v of val) {
+      result.push(v[field])
+    }
+  }
+  return result
+}

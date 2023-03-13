@@ -1,7 +1,7 @@
 package service
 
 import (
-	"console/biz/gm/accounts/model"
+	"console/biz/gm/model"
 	"github.com/localhostjason/webserver/db"
 	"gorm.io/gorm"
 )

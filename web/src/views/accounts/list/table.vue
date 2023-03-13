@@ -16,8 +16,8 @@
         <el-table-column prop="capacity" label="容量" width="180" />
         <el-table-column label="操作" align="right">
           <template #default="scope">
-            <el-button type="text">修改密码</el-button>
-            <el-button type="text">删除</el-button>
+            <el-button text>修改密码</el-button>
+            <el-button text>删除</el-button>
           </template>
         </el-table-column>
       </el-table>

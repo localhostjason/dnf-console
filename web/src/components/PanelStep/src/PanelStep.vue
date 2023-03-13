@@ -11,7 +11,9 @@
       </el-col>
     </el-row>
     <div>
-      <slot></slot>
+      <div style="padding: 10px 30px">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>

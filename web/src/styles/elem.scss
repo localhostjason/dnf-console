@@ -84,3 +84,9 @@
 .el-dialog__body {
   padding-bottom: 10px;
 }
+
+.radio {
+  .el-radio__label {
+    display: none;
+  }
+}

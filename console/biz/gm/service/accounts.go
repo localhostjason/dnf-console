@@ -1,7 +1,7 @@
 package service
 
 import (
-	"console/biz/gm/accounts/model"
+	"console/biz/gm/model"
 	"console/mods/game_db"
 	"errors"
 	"github.com/localhostjason/webserver/server/util/uv"
