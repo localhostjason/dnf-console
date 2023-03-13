@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-form :model="form" :rules="rules" ref="formRef" label-width="100px">
-      <el-form-item prop="uid">
+      <el-form-item label="账号ID" prop="uid">
         <el-select
           v-model="form.uid"
           filterable
