@@ -9,7 +9,7 @@ import (
 )
 
 func GetAccounts(q *AccountFilter, pi *uv.PagingIn, order *uv.Order) ([]AccountResult, *uv.PagingOut, error) {
-	dbx := game_db.DBPools.Get(model.AccountDbKey)
+	dbx := game_db.DBPools.Get(model.DTaiwan)
 	tx := q.FilterQuery(dbx)
 
 	var lst = make([]model.Accounts, 0)
@@ -33,7 +33,7 @@ func GetAccounts(q *AccountFilter, pi *uv.PagingIn, order *uv.Order) ([]AccountR
 }
 
 func getGameRolesByUid(uid int) int64 {
-	dbx := game_db.DBPools.Get(model.AccountDetailDbKey)
+	dbx := game_db.DBPools.Get(model.TaiwanCain)
 
 	var total int64
 	dbx.Table("charac_info").Where("m_id = ?", uid).Count(&total)
@@ -41,7 +41,7 @@ func getGameRolesByUid(uid int) int64 {
 }
 
 func getGameMoneyByUid(uid int) (int, int) {
-	dbx := game_db.DBPools.Get(model.AccountDetailDbKey)
+	dbx := game_db.DBPools.Get(model.TaiwanCain)
 	type _R struct {
 		Money    int `json:"money"`
 		Capacity int `json:"capacity"`

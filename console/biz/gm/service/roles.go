@@ -8,14 +8,14 @@ import (
 )
 
 func GetRoles(uid int) ([]model.CharacInfo, error) {
-	db1 := game_db.DBPools.Get(model.AccountDbKey)
+	db1 := game_db.DBPools.Get(model.DTaiwan)
 	err := db1.First(&model.Accounts{}, uid).Error
 
 	var data = make([]model.CharacInfo, 0)
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return data, errors.New("该账号不存在")
 	}
-	dbx := game_db.DBPools.Get(model.AccountDetailDbKey)
+	dbx := game_db.DBPools.Get(model.TaiwanCain)
 	dbx.Table("charac_info").Where("m_id = ?", uid).Find(&data)
 	return data, nil
 }

@@ -10,5 +10,5 @@ type Accounts struct {
 }
 
 func init() {
-	game_db.RegTables(AccountDbKey, &Accounts{})
+	game_db.RegTables(DTaiwan, &Accounts{})
 }

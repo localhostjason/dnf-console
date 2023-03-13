@@ -9,7 +9,7 @@ import (
 )
 
 func GetTaskByRole(characNo int) ([]model.Task, error) {
-	dbx := game_db.DBPools.Get(model.AccountDetailDbKey)
+	dbx := game_db.DBPools.Get(model.TaiwanCain)
 
 	var characInfo model.CharacInfo
 	err := dbx.Table("charac_info").Where("charac_no = ?", characNo).First(&characInfo).Error
@@ -23,7 +23,7 @@ func GetTaskByRole(characNo int) ([]model.Task, error) {
 }
 
 func UpdateTaskByRole(characNo int, ids []int) error {
-	dbx := game_db.DBPools.Get(model.AccountDetailDbKey)
+	dbx := game_db.DBPools.Get(model.TaiwanCain)
 
 	var characInfo model.CharacInfo
 	err := dbx.Table("charac_info").Where("charac_no = ?", characNo).First(&characInfo).Error

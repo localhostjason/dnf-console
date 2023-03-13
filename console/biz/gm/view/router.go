@@ -14,6 +14,8 @@ func InitGmRouter(r *ginx.RouterGroup) {
 	{
 		tasks.GET("获取任务列表", ":id/tasks", getRoleTasks)
 		tasks.PUT("更新任务列表", ":id/tasks", updateRoleTasks)
+
+		tasks.POST("发送邮件", ":id/email", sendEmail) // id === charac no
 	}
 
 }
