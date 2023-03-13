@@ -43,3 +43,7 @@ func SendEmail(characNo int, email *Email) error {
 	}).Error
 
 }
+
+func GetGoldList() any {
+	return nil
+}

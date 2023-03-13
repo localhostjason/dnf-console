@@ -18,4 +18,9 @@ func InitGmRouter(r *ginx.RouterGroup) {
 		tasks.POST("发送邮件", ":id/email", sendEmail) // id === charac no
 	}
 
+	gold := r.Group("物品", "gold")
+	{
+		gold.GET("获取物品代码", "list", getGolds)
+	}
+
 }

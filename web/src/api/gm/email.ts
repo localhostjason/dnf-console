@@ -7,3 +7,10 @@ export const sendEmailByRole = (characNo: number, data: any): Promise<any> => {
     data
   })
 }
+
+export const getGolds = (): Promise<any> => {
+  return http.request({
+    url: `/gm/gold/list`,
+    method: 'get'
+  })
+}

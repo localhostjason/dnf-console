@@ -15,3 +15,8 @@ func sendEmail(c *gin.Context) {
 	uv.PEIf(E_EMAIL_POST, err)
 	c.Status(201)
 }
+
+func getGolds(c *gin.Context) {
+	data := service.GetGoldList()
+	c.JSON(200, data)
+}

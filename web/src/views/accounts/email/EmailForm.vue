@@ -16,7 +16,16 @@
           </el-form-item>
         </el-form>
       </el-col>
-      <el-col :span="10">111</el-col>
+      <el-col :span="6" :offset="13">
+        <el-card class="box-card">
+          <template #header>
+            <div class="card-header">
+              <span>物品代码</span>
+            </div>
+          </template>
+          <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
+        </el-card>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -26,7 +35,7 @@ import { reactive, ref } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
 import { Email } from '@/views/accounts/email/model'
 import { validate } from '@/utils/element/form'
-import { sendEmailByRole } from '@/api/gm/email'
+import { sendEmailByRole, getGolds } from '@/api/gm/email'
 import { errorMessage, successMessage } from '@/utils/element/message'
 
 const formRef = ref<FormInstance>()
@@ -62,8 +71,14 @@ const setCharacNo = (id: number) => {
   characNo.value = id
 }
 
-// hook
+const getGoldList = async () => {
+  try {
+    await getGolds()
+  } catch (e) {}
+}
 
+// hook
+getGoldList()
 defineExpose({
   setCharacNo
 })
