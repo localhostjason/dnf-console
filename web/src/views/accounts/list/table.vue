@@ -13,6 +13,7 @@
             <span>{{ formatPrice(scope.row.money) }}</span>
           </template>
         </el-table-column>
+        <el-table-column prop="capacity" label="容量" width="180" />
         <el-table-column label="操作" align="right">
           <template #default="scope">
             <el-button type="text">修改密码</el-button>
@@ -39,7 +40,7 @@
 <script setup lang="ts">
 import { getAccounts } from '@/api/gm/accounts'
 import { reactive } from 'vue'
-import { AccountState, FilterAccountForm } from '@/views/accounts/list/model'
+import { AccountState, FilterAccountForm, Account } from '@/views/accounts/list/model'
 import { PageQuery } from '@/models/page'
 
 // define
@@ -64,9 +65,9 @@ const getAccountList = async () => {
     ...argQuery,
     ...pageQuery
   }
-  const { items, total } = await getAccounts(params)
-  state.data = items
-  state.total = total
+  const data: Account = await getAccounts(params)
+  state.data = data.items
+  state.total = data.total
   state.loading = false
 }
 

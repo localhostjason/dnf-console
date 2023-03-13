@@ -4,6 +4,7 @@ export type AccountDetail = {
   qqq: string
   roles: number
   money: any
+  capacity: number
 }
 
 export type Account = {

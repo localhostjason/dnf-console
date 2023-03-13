@@ -14,10 +14,37 @@ const accountsRoutes: Array<AppRouteRecordRaw> = [
     children: [
       {
         path: 'accounts',
-        name: 'Accounts',
+        name: 'GmAccounts',
         component: () => import('@/views/accounts/list/index.vue'),
         meta: {
           title: '账号管理',
+          icon: 'person'
+        }
+      },
+      {
+        path: 'roles',
+        name: 'GmRoles',
+        component: () => import('@/views/accounts/roles/index.vue'),
+        meta: {
+          title: '角色管理',
+          icon: 'person'
+        }
+      },
+      {
+        path: 'tasks',
+        name: 'GmTasks',
+        component: () => import('@/views/accounts/tasks/index.vue'),
+        meta: {
+          title: '任务清理',
+          icon: 'person'
+        }
+      },
+      {
+        path: 'email',
+        name: 'GmEmail',
+        component: () => import('@/views/accounts/email/index.vue'),
+        meta: {
+          title: '邮件工具',
           icon: 'person'
         }
       },

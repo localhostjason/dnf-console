@@ -1,7 +1,7 @@
 import { http } from '@/utils/http'
-import { Account } from '@/views/accounts/list/model'
+import { Account, AccountDetail } from '@/views/accounts/list/model'
 
-export const getAccounts = (params: any): Promise<Account> => {
+export const getAccounts = <T = Account | AccountDetail[]>(params: any): Promise<T> => {
   return http.request({
     url: `/gm/account/list`,
     method: 'get',
