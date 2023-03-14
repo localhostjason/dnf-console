@@ -160,3 +160,20 @@ fieldset {
 .text-default {
   color: $default;
 }
+
+
+.div_title {
+  text-indent: 8px;
+  border-left: 2px solid #88b7e0;
+  color: #666;
+  margin-bottom: 10px;
+  //font-size: 14px;
+
+  //* {
+  //  font-size: 14px;
+  //}
+
+  .el-tag--small {
+    padding-left: 0;
+  }
+}

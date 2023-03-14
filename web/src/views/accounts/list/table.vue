@@ -1,23 +1,29 @@
 <template>
   <div>
     <el-row>
-      <el-button type="primary">注册账号</el-button>
+      <el-button type="primary" @click="reg">注册账号</el-button>
     </el-row>
     <el-row>
       <el-table v-loading="state.loading" :data="state.data" ref="tableRef" border>
         <el-table-column prop="uid" label="UID" width="180" />
         <el-table-column prop="account_name" label="账号名" width="200" />
         <el-table-column prop="roles" label="创建角色总数" width="120" align="center" />
-        <el-table-column prop="money" label="携带金钱" width="180">
+        <el-table-column prop="cera_point" label="D点" width="180">
           <template #default="scope">
-            <span>{{ formatPrice(scope.row.money) }}</span>
+            <span>{{ formatPrice(scope.row.cera_point) }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="cera" label="D币" width="180">
+          <template #default="scope">
+            <span>{{ formatPrice(scope.row.cera) }}</span>
           </template>
         </el-table-column>
         <el-table-column prop="capacity" label="容量" width="180" />
         <el-table-column label="操作" align="right">
           <template #default="scope">
-            <el-button text>修改密码</el-button>
-            <el-button text>删除</el-button>
+            <el-button type="primary" link @click="recharge(scope.row)">充值</el-button>
+            <el-button type="primary" link @click="updatePwd">修改密码</el-button>
+            <el-button type="primary" link @click="deleteAccount">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -34,14 +40,18 @@
         @current-change="handleCurrentChange"
       ></el-pagination>
     </el-row>
+
+    <recharge-dialog ref="rechargeDialogRef" @reloadAccount="getAccountList"></recharge-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
 import { getAccounts } from '@/api/gm/accounts'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { AccountState, FilterAccountForm, Account } from '@/views/accounts/list/model'
 import { PageQuery } from '@/models/page'
+import { warnMessage } from '@/utils/element/message'
+import RechargeDialog from './components/RechargeDialog'
 
 // define
 const state = reactive<AccountState>({
@@ -58,6 +68,8 @@ const pageQuery = reactive<PageQuery>({
 let argQuery = reactive<FilterAccountForm>({
   uid: ''
 })
+
+const rechargeDialogRef = ref<any>(null)
 
 const getAccountList = async () => {
   state.loading = true
@@ -93,6 +105,23 @@ function formatPrice(price) {
   } catch (e) {
     return price
   }
+}
+
+const reg = () => {
+  warnMessage('未实现')
+}
+
+const updatePwd = () => {
+  warnMessage('未实现')
+}
+
+const deleteAccount = () => {
+  warnMessage('未实现')
+}
+
+// 充值
+const recharge = row => {
+  rechargeDialogRef.value.showRechargeDialog(row)
 }
 
 // hook

@@ -20,12 +20,15 @@ func GetAccounts(q *AccountFilter, pi *uv.PagingIn, order *uv.Order) ([]AccountR
 		roles := getGameRolesByUid(info.Uid)
 
 		money, capacity := getGameMoneyByUid(info.Uid)
+		ceraPoint, cera := getCashByUid(info.Uid)
 
 		data = append(data, AccountResult{
-			Accounts: info,
-			Roles:    roles,
-			Money:    money,
-			Capacity: capacity,
+			Accounts:  info,
+			Roles:     roles,
+			Money:     money,
+			Capacity:  capacity,
+			CeraPoint: ceraPoint,
+			Cera:      cera,
 		})
 	}
 
@@ -55,4 +58,38 @@ func getGameMoneyByUid(uid int) (int, int) {
 	}
 
 	return result.Money, result.Capacity
+}
+
+func getCashByUid(uid int) (int, int) {
+	dbx := game_db.DBPools.Get(model.TaiwanBilling)
+
+	type CashPoint struct {
+		CeraPoint int `gorm:"column:cera_point"`
+	}
+	var data CashPoint
+	dbx.Table("cash_cera_point").Where("account = ?", uid).Take(&data)
+
+	type CashCera struct {
+		Cera    int
+		ModTran int
+	}
+	var d CashCera
+	dbx.Table("cash_cera").Where("account = ?", uid).Take(&d)
+
+	return data.CeraPoint, d.Cera
+}
+
+func RechargeAccount(uid int, data *RechargeReq) error {
+	dbx := game_db.DBPools.Get(model.TaiwanBilling)
+	if data.CeraOption == "cera" {
+		err := dbx.Table("cash_cera").Where("account = ?", uid).Updates(map[string]interface{}{
+			"cera": data.Cera,
+		}).Error
+		return err
+	}
+	errPoint := dbx.Table("cash_cera_point").Where("account = ?", uid).Updates(map[string]interface{}{
+		"cera_point": data.CeraPoint,
+	}).Error
+
+	return errPoint
 }

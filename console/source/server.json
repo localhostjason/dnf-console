@@ -69,6 +69,18 @@
         "timeout": 5,
         "multi_statements": false,
         "debug": false
+      },
+      {
+        "key": "taiwan_billing",
+        "user": "game",
+        "password": "uu5!^%jg",
+        "host": "192.168.43.143",
+        "port": 3306,
+        "db": "taiwan_billing",
+        "charset": "utf8",
+        "timeout": 5,
+        "multi_statements": false,
+        "debug": false
       }
     ]
   },

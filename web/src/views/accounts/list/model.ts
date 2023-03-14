@@ -5,6 +5,9 @@ export type AccountDetail = {
   roles: number
   money: any
   capacity: number
+
+  cera_point: number // d点
+  cera: number // d币
 }
 
 export type Account = {
@@ -25,4 +28,11 @@ export type ModifyAccountForm = {}
 
 export type FilterAccountForm = {
   uid: string
+}
+
+export type RechargeForm = {
+  cera_point: number // d点
+  cera: number // d币
+
+  cera_option: string
 }
