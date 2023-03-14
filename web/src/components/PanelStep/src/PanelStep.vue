@@ -11,7 +11,7 @@
       </el-col>
     </el-row>
     <div>
-      <div style="padding: 10px 30px">
+      <div style="padding: 10px 30px; margin-bottom: 30px">
         <slot></slot>
       </div>
     </div>

@@ -4,6 +4,7 @@ import (
 	"console/biz/gm/model"
 	"console/mods/game_db"
 	"fmt"
+	"github.com/localhostjason/webserver/server/util/uv"
 	"time"
 )
 
@@ -44,6 +45,12 @@ func SendEmail(characNo int, email *Email) error {
 
 }
 
-func GetGoldList() any {
-	return nil
+func GetGoldList(q *GoldQ, pi *uv.PagingIn, order *uv.Order) ([]model.Gold, *uv.PagingOut, error) {
+	dbx := game_db.DBPools.Get(model.TaiwanCain2nd)
+	tx := q.FilterQuery(dbx)
+
+	var lst = make([]model.Gold, 0)
+	po, err := uv.PagingFind(tx, &lst, pi, order)
+
+	return lst, po, err
 }

@@ -8,9 +8,10 @@ export const sendEmailByRole = (characNo: number, data: any): Promise<any> => {
   })
 }
 
-export const getGolds = (): Promise<any> => {
+export const getGolds = (params: object): Promise<any> => {
   return http.request({
     url: `/gm/gold/list`,
-    method: 'get'
+    method: 'get',
+    params
   })
 }

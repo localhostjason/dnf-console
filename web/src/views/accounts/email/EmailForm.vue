@@ -16,14 +16,46 @@
           </el-form-item>
         </el-form>
       </el-col>
-      <el-col :span="6" :offset="13">
+      <el-col :span="13" :offset="6">
         <el-card class="box-card">
           <template #header>
             <div class="card-header">
               <span>物品代码</span>
             </div>
           </template>
-          <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
+          <div>
+            <el-row>
+              <el-form :inline="true" :model="argQuery" ref="filterFormRef" label-width="100px">
+                <div>
+                  <el-form-item label="物品名称:" prop="name">
+                    <el-input v-model="argQuery.name" clearable></el-input>
+                  </el-form-item>
+                  <el-form-item>
+                    <el-button type="primary" @click="filterGold">查询</el-button>
+                    <el-button @click.prevent="reset">重置</el-button>
+                  </el-form-item>
+                </div>
+              </el-form>
+            </el-row>
+            <el-row>
+              <el-table :data="goldState.data" v-loading="goldState.loading" border fit>
+                <el-table-column prop="code" label="物品编号" width="150" />
+                <el-table-column prop="name" label="物品名称" />
+              </el-table>
+            </el-row>
+            <el-row>
+              <el-pagination
+                :current-page="pageQuery.page"
+                :page-sizes="[10, 20, 30, 40, 50]"
+                :page-size="pageQuery.per_page"
+                :total="goldState.total"
+                background
+                layout="total, sizes, prev, pager, next, jumper"
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+              ></el-pagination>
+            </el-row>
+          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -33,10 +65,11 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
-import { Email } from '@/views/accounts/email/model'
+import { Email, FilterGold } from '@/views/accounts/email/model'
 import { validate } from '@/utils/element/form'
 import { sendEmailByRole, getGolds } from '@/api/gm/email'
 import { errorMessage, successMessage } from '@/utils/element/message'
+import { PageQuery } from '@/models/page'
 
 const formRef = ref<FormInstance>()
 
@@ -51,6 +84,23 @@ const rules = reactive<FormRules>({
 })
 
 const characNo = ref<number>(null)
+
+const goldState = reactive<any>({
+  data: [],
+  total: 0,
+  loading: false
+})
+
+const pageQuery = reactive<PageQuery>({
+  page: 1,
+  per_page: 10
+})
+
+let argQuery = reactive<FilterGold>({
+  name: ''
+})
+
+const filterFormRef = ref<FormInstance>()
 
 const sendEmail = async () => {
   const valid = await validate(formRef)
@@ -72,9 +122,36 @@ const setCharacNo = (id: number) => {
 }
 
 const getGoldList = async () => {
-  try {
-    await getGolds()
-  } catch (e) {}
+  goldState.loading = true
+  const params = {
+    ...argQuery,
+    ...pageQuery
+  }
+  const { items, total } = await getGolds(params)
+  goldState.data = items
+  goldState.total = total
+  goldState.loading = false
+}
+
+const handleSizeChange = (params_limit: number) => {
+  pageQuery.per_page = params_limit
+  getGoldList()
+}
+
+const handleCurrentChange = (params_page: number) => {
+  pageQuery.page = params_page
+  getGoldList()
+}
+
+const filterGold = () => {
+  pageQuery.page = 1
+  getGoldList()
+}
+
+const reset = () => {
+  filterFormRef.value.resetFields()
+  pageQuery.page = 1
+  getGoldList()
 }
 
 // hook
