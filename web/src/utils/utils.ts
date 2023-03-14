@@ -44,3 +44,11 @@ export function getIdFormArray(val, field = 'id') {
   }
   return result
 }
+
+export function formatPrice(price) {
+  try {
+    return String(price).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  } catch (e) {
+    return price
+  }
+}

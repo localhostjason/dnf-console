@@ -14,6 +14,7 @@ export type Role = {
   charac_name: string
   lev: string
   create_time: string
+  money: number
 }
 
 export type RoleState = {

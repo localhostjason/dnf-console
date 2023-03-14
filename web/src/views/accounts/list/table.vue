@@ -18,7 +18,11 @@
             <span>{{ formatPrice(scope.row.cera) }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="capacity" label="容量" width="180" />
+        <el-table-column prop="money" label="账号金库存款" width="180">
+          <template #default="scope">
+            <span>{{ formatPrice(scope.row.money) }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" align="right">
           <template #default="scope">
             <el-button type="primary" link @click="recharge(scope.row)">充值</el-button>

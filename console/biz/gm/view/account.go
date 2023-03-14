@@ -14,3 +14,14 @@ func getAccounts(c *gin.Context) {
 
 	c.JSON(200, uv.PagedOut(lst, po))
 }
+
+func rechargeAccount(c *gin.Context) {
+	uid := uv.PPID(c, "id")
+
+	data := &service.RechargeReq{}
+	uv.PB(c, data)
+
+	err := service.RechargeAccount(uid, data)
+	uv.PEIf(E_RECHARGE_POST, err)
+	c.Status(201)
+}

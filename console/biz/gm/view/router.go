@@ -8,6 +8,8 @@ func InitGmRouter(r *ginx.RouterGroup) {
 	{
 		accounts.GET("获取账号列表", "list", getAccounts)
 		accounts.GET("获取角色信息", ":id/roles", getRoles)
+
+		accounts.POST("充值", ":id/recharge", rechargeAccount)
 	}
 
 	tasks := r.Group("任务清理", "roles")

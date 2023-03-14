@@ -79,6 +79,11 @@ func getCashByUid(uid int) (int, int) {
 	return data.CeraPoint, d.Cera
 }
 
+/*
+1. cash_cera_point 充值D点
+1. cash_cera 充值D币
+*/
+
 func RechargeAccount(uid int, data *RechargeReq) error {
 	dbx := game_db.DBPools.Get(model.TaiwanBilling)
 	if data.CeraOption == "cera" {
