@@ -1,0 +1,108 @@
+{
+  "api": {
+    "cors": true
+  },
+  "auth": {
+    "realm": "test zone",
+    "secret": "f450a7bdbde3416d22474b9fdc2a3636",
+    "id_key": "username",
+    "timeout": 43200,
+    "max_refresh": 3600
+  },
+  "casbin": {
+    "file": "D:\\work\\webconsole\\config\\rbac_model.conf"
+  },
+  "db": {
+    "db_type": "sqlite",
+    "enable": true,
+    "mysql": {
+      "user": "game",
+      "password": "uu5!^%jg",
+      "host": "192.168.43.143",
+      "port": 3306,
+      "db": "center",
+      "charset": "utf8",
+      "timeout": 5,
+      "multi_statements": false,
+      "debug": false
+    },
+    "sqlite": {
+      "db_file": "data/data.db",
+      "debug": false
+    }
+  },
+  "game_db": {
+    "enable": true,
+    "mysql": [
+      {
+        "key": "d_taiwan",
+        "user": "game",
+        "password": "uu5!^%jg",
+        "host": "192.168.43.143",
+        "port": 3306,
+        "db": "d_taiwan",
+        "charset": "utf8",
+        "timeout": 5,
+        "multi_statements": false,
+        "debug": false
+      },
+      {
+        "key": "taiwan_cain",
+        "user": "game",
+        "password": "uu5!^%jg",
+        "host": "192.168.43.143",
+        "port": 3306,
+        "db": "taiwan_cain",
+        "charset": "utf8",
+        "timeout": 5,
+        "multi_statements": false,
+        "debug": false
+      },
+      {
+        "key": "taiwan_cain_2nd",
+        "user": "game",
+        "password": "uu5!^%jg",
+        "host": "192.168.43.143",
+        "port": 3306,
+        "db": "taiwan_cain_2nd",
+        "charset": "utf8",
+        "timeout": 5,
+        "multi_statements": false,
+        "debug": false
+      }
+    ]
+  },
+  "service": {
+    "pid_file": "console.pid",
+    "daemon_log": "daemon.log"
+  },
+  "webserver": {
+    "log_level": "info",
+    "log_path": "D:\\work\\dnf-web\\console\\log",
+    "access_log": "access-%Y%m%d.log",
+    "error_log": "error-%Y%m%d.log",
+    "sys_log": "sys-%Y%m%d.log",
+    "ssl": false,
+    "require_cert": false,
+    "min_tls_version": "1.2",
+    "cert_file": "D:\\work\\dnf-web\\console\\config\\web.crt",
+    "key_file": "D:\\work\\dnf-web\\console\\config\\web.key",
+    "bind_6": "::",
+    "bind": "0.0.0.0",
+    "port": 8088,
+    "read_timeout": 60,
+    "write_timeout": 60,
+    "max_header_bytes": 2097152,
+    "gzip": false,
+    "stop_wait": 5,
+    "response_header": {
+      "Content-Security-Policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval';img-src 'self' data:;font-src 'self';frame-ancestors 'self'",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Strict-Transport-Security": "max-age=172800",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "SAMEORIGIN",
+      "X-XSS-Protection": "1;mode=block"
+    },
+    "enable_grpc": false
+  }
+}

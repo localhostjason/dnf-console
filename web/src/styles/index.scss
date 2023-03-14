@@ -2,6 +2,7 @@
 @import "./transition.scss";
 @import "./elem.scss";
 @import "./sidebar.scss";
+@import "./color.scss";
 
 body {
   width: 100%;
@@ -126,4 +127,36 @@ fieldset {
   label {
     font-weight: normal;
   }
+}
+
+.text-gray {
+  color: #565252;
+
+  &.sm {
+    font-size: 12px;
+  }
+}
+
+.text-gray-ol {
+  color: #999999;
+
+  &.sm {
+    font-size: 12px;
+  }
+}
+
+.text-warning {
+  color: $warning;
+
+  &.sm {
+    font-size: 12px;
+  }
+}
+
+.text-success {
+  color: $success;
+}
+
+.text-default {
+  color: $default;
 }

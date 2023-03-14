@@ -17,6 +17,10 @@ func sendEmail(c *gin.Context) {
 }
 
 func getGolds(c *gin.Context) {
-	data := service.GetGoldList()
-	c.JSON(200, data)
+	var pi, order, q = &uv.PagingIn{}, &uv.Order{}, &service.GoldQ{}
+	uv.PQ(c, pi, order, q)
+
+	lst, po, err := service.GetGoldList(q, pi, order)
+	uv.PEIf(E_GOLD_GET, err)
+	c.JSON(200, uv.PagedOut(lst, po))
 }

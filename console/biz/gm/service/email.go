@@ -3,7 +3,6 @@ package service
 import (
 	"console/biz/gm/model"
 	"console/mods/game_db"
-	"fmt"
 	"github.com/localhostjason/webserver/server/util/uv"
 	"time"
 )
@@ -30,7 +29,13 @@ func SendEmail(characNo int, email *Email) error {
 	var data _R
 	dbx.Table("letter").Where("charac_no = ?", characNo).Order("letter_id desc").Take(&data)
 
-	fmt.Println(123, data.LetterId)
+	//fmt.Println(123, data.LetterId)
+	amplifyOption := 3
+	amplifyValue := 0
+	if email.IsAmplify {
+		amplifyOption = email.AmplifyOption
+		amplifyValue = email.AmplifyValue
+	}
 
 	now := time.Now()
 	return dbx.Debug().Table("postal").Create(map[string]interface{}{
@@ -41,6 +46,12 @@ func SendEmail(characNo int, email *Email) error {
 		"item_id":           email.Code,
 		"add_info":          email.Number,
 		"letter_id":         data.LetterId,
+		"seperate_upgrade":  email.SeperateUpgrade,
+		"upgrade":           email.Upgrade,
+		"amplify_option":    amplifyOption,
+		"amplify_value":     amplifyValue,
+		"gold":              email.Gold,
+		"seal_flag":         email.SealFlag,
 	}).Error
 
 }

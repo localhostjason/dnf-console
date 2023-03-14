@@ -8,6 +8,7 @@ const (
 	E_TASKS_GET    = "E_TASKS_GET"
 	E_TASKS_UPDATE = "E_TASKS_UPDATE"
 	E_EMAIL_POST   = "E_EMAIL_POST"
+	E_GOLD_GET     = "E_GOLD_GET"
 )
 
 var eMap = map[string]ue.Error{
@@ -16,6 +17,7 @@ var eMap = map[string]ue.Error{
 	E_TASKS_GET:    {Code: E_TASKS_GET, Desc: "获取任务错误", Msg: "%v"},
 	E_TASKS_UPDATE: {Code: E_TASKS_UPDATE, Desc: "更新任务错误", Msg: "%v"},
 	E_EMAIL_POST:   {Code: E_EMAIL_POST, Desc: "发送邮件错误", Msg: "%v"},
+	E_GOLD_GET:     {Code: E_GOLD_GET, Desc: "获取物品错误", Msg: "%v"},
 }
 
 func init() {

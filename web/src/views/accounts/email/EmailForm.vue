@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :span="5">
+      <el-col :span="8">
         <el-form :model="form" :rules="rules" ref="formRef" label-width="100px">
           <el-form-item label="物品代码" prop="code">
             <el-input v-model.number="form.code"></el-input>
@@ -11,12 +11,43 @@
             <el-input v-model.number="form.number"></el-input>
           </el-form-item>
 
+          <el-form-item label="武器锻造等级" prop="seperate_upgrade">
+            <el-input v-model.number="form.seperate_upgrade"></el-input>
+          </el-form-item>
+
+          <el-form-item label="强化/增幅等级" prop="upgrade">
+            <el-input v-model.number="form.upgrade"></el-input>
+          </el-form-item>
+
+          <el-form-item label="具备异界属性">
+            <el-checkbox v-model="form.is_amplify" />
+          </el-form-item>
+
+          <el-form-item label="红字" v-show="form.is_amplify">
+            <el-select v-model="form.amplify_option">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+            </el-select>
+          </el-form-item>
+
+          <el-form-item label="追加属性" prop="amplify_value" v-show="form.is_amplify">
+            <el-input v-model.number="form.amplify_value"></el-input>
+          </el-form-item>
+
+          <el-form-item label="金币" prop="gold">
+            <el-input v-model.number="form.gold"></el-input>
+          </el-form-item>
+
+          <el-form-item label="是否封装">
+            <el-checkbox v-model="form.seal_flag" />
+            <span class="text-warning sm">ss装备不要勾选！！！</span>
+          </el-form-item>
+
           <el-form-item>
             <el-button type="primary" size="small" @click="sendEmail">发送</el-button>
           </el-form-item>
         </el-form>
       </el-col>
-      <el-col :span="13" :offset="6">
+      <el-col :span="13" :offset="3">
         <el-card class="box-card">
           <template #header>
             <div class="card-header">
@@ -75,15 +106,30 @@ const formRef = ref<FormInstance>()
 
 const form = reactive<Email>({
   code: null,
-  number: 0
+  number: 0,
+  seperate_upgrade: 0,
+  upgrade: 0,
+  is_amplify: false,
+  amplify_option: 3,
+  amplify_value: 0,
+  gold: 0,
+  seal_flag: false
 })
 
 const rules = reactive<FormRules>({
   code: [{ required: true, message: '请输入物品代码', trigger: 'blur' }],
-  number: [{ required: true, message: '请输入数量', trigger: 'blur' }]
+  number: [{ required: true, message: '请输入数量', trigger: 'blur' }],
+  upgrade: [{ type: 'integer', min: 0, max: 31, message: '强化/增幅等级在0至31', trigger: 'blur' }]
 })
 
 const characNo = ref<number>(null)
+
+const options = [
+  { label: '体力', value: 1 },
+  { label: '精神', value: 2 },
+  { label: '力量', value: 3 },
+  { label: '智力', value: 4 }
+]
 
 const goldState = reactive<any>({
   data: [],
