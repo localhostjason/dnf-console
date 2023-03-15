@@ -25,3 +25,10 @@ func rechargeAccount(c *gin.Context) {
 	uv.PEIf(E_RECHARGE_POST, err)
 	c.Status(201)
 }
+
+func resetCreateCharac(c *gin.Context) {
+	uid := uv.PPID(c, "id")
+	err := service.ResetCreateCharac(uid)
+	uv.PEIf(E_RESET_CREATE_CHARAC, err)
+	c.Status(201)
+}

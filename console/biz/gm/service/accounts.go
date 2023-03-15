@@ -6,6 +6,7 @@ import (
 	"errors"
 	"github.com/localhostjason/webserver/server/util/uv"
 	"gorm.io/gorm"
+	"time"
 )
 
 func GetAccounts(q *AccountFilter, pi *uv.PagingIn, order *uv.Order) ([]AccountResult, *uv.PagingOut, error) {
@@ -97,4 +98,23 @@ func RechargeAccount(uid int, data *RechargeReq) error {
 	}).Error
 
 	return errPoint
+}
+
+// ResetCreateCharac 重置 创建 角色
+func ResetCreateCharac(uid int) error {
+	dbx := game_db.DBPools.Get(model.DTaiwan)
+
+	var data = struct{}{}
+	dbx.Table("limit_create_character").Where("m_id = ?", uid).Delete(&data)
+
+	// 创建一个 uid = 0
+
+	now := time.Now()
+	err := dbx.Table("limit_create_character").Where("m_id = ?", uid).Create(map[string]interface{}{
+		"m_id":             uid,
+		"count":            0,
+		"last_access_time": now.Format("2006-01-02 15:04:05"),
+	}).Error
+
+	return err
 }
