@@ -25,9 +25,12 @@
         </el-table-column>
         <el-table-column label="操作" align="right">
           <template #default="scope">
-            <el-button type="primary" link @click="recharge(scope.row)">充值</el-button>
-            <el-button type="primary" link @click="updatePwd">修改密码</el-button>
-            <el-button type="primary" link @click="deleteAccount">删除</el-button>
+            <el-button type="primary" link @click="recharge(scope.row)" size="small">充值</el-button>
+            <el-button type="primary" link @click="resetCreateCharacHandler(scope.row)" size="small"
+              >重置创建角色</el-button
+            >
+            <el-button type="primary" link @click="updatePwd" size="small">修改密码</el-button>
+            <el-button type="primary" link @click="deleteAccount" size="small">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -50,12 +53,13 @@
 </template>
 
 <script setup lang="ts">
-import { getAccounts } from '@/api/gm/accounts'
+import { getAccounts, resetCreateCharac } from '@/api/gm/accounts'
 import { reactive, ref } from 'vue'
 import { AccountState, FilterAccountForm, Account } from '@/views/accounts/list/model'
 import { PageQuery } from '@/models/page'
-import { warnMessage } from '@/utils/element/message'
+import { successMessage, warnMessage } from '@/utils/element/message'
 import RechargeDialog from './components/RechargeDialog'
+import { confirmWarning } from '@/utils/element/messageBox'
 
 // define
 const state = reactive<AccountState>({
@@ -126,6 +130,14 @@ const deleteAccount = () => {
 // 充值
 const recharge = row => {
   rechargeDialogRef.value.showRechargeDialog(row)
+}
+
+const resetCreateCharacHandler = async row => {
+  try {
+    await confirmWarning('是否重置 创建角色 限制？')
+    await resetCreateCharac(row.uid)
+    successMessage('重置成功！')
+  } catch (e) {}
 }
 
 // hook

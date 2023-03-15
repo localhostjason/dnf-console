@@ -16,3 +16,10 @@ export const rechargeByUid = (uid: number, data: RechargeForm): Promise<any> => 
     data
   })
 }
+
+export const resetCreateCharac = (uid: number): Promise<any> => {
+  return http.request({
+    url: `/gm/account/${uid}/reset_create_charac`,
+    method: 'post'
+  })
+}
