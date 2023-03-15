@@ -87,11 +87,17 @@ const form = reactive<RechargeForm>({
   cera_option: 'cera'
 })
 
-let data = {
+type Info = {
+  uid: number
+  cera_point: number
+  cera: number
+}
+
+const data = reactive<Info>({
   uid: 0,
   cera_point: 0,
   cera: 0
-}
+})
 
 const rules = reactive<FormRules>({
   cera: [{ type: 'integer', min: 0, message: 'D币不能少于0', trigger: 'blur' }],
@@ -113,7 +119,9 @@ const rechargeAccount = async () => {
 }
 
 const showRechargeDialog = (row: AccountDetail) => {
-  data = row
+  data.uid = row.uid
+  data.cera_point = row.cera_point
+  data.cera = row.cera
   dialog.visible = true
 }
 
