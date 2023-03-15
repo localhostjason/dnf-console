@@ -23,9 +23,6 @@ export type AccountState = {
   loading: boolean
   total: number
 }
-
-export type ModifyAccountForm = {}
-
 export type FilterAccountForm = {
   uid: string
 }

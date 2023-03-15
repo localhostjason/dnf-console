@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { nextTick, reactive, ref } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
-import { ChangePassword } from '@/views/accounts/list/model/info'
+import { ChangePasswordForm } from '@/views/accounts/list/model/info'
 import { AccountDetail } from '@/views/accounts/list/model/model'
 import { validate } from '@/utils/element/form'
 import { updateAccountPasswordByUid } from '@/api/gm/accounts'
@@ -50,7 +50,7 @@ const dialog = reactive({
   title: ''
 })
 const formRef = ref<FormInstance>()
-const form = reactive<ChangePassword>({
+const form = reactive<ChangePasswordForm>({
   password: '',
   check_password: ''
 })

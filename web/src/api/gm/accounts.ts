@@ -1,6 +1,6 @@
 import { http } from '@/utils/http'
 import { Account, AccountDetail, RechargeForm } from '@/views/accounts/list/model/model'
-import { ChangePassword, CreateAccountForm, EditAccountForm } from '@/views/accounts/list/model/info'
+import { ChangePasswordForm, CreateAccountForm, EditAccountForm } from '@/views/accounts/list/model/info'
 
 export const getAccounts = <T = Account | AccountDetail[]>(params: any): Promise<T> => {
   return http.request({
@@ -32,7 +32,7 @@ export const deleteAccount = (uid: number): Promise<any> => {
   })
 }
 
-export const updateAccountPasswordByUid = (uid: number, data: ChangePassword): Promise<any> => {
+export const updateAccountPasswordByUid = (uid: number, data: ChangePasswordForm): Promise<any> => {
   return http.request({
     url: `/gm/account/${uid}/change_password`,
     method: 'post',
