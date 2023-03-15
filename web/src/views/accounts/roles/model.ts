@@ -1,4 +1,4 @@
-import { AccountDetail } from '@/views/accounts/list/model'
+import { AccountDetail } from '@/views/accounts/list/model/model'
 
 export type AccountOptions = {
   data: AccountDetail[]

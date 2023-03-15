@@ -39,3 +39,19 @@ type RoleResult struct {
 	model.CharacInfo
 	Money int `json:"money"`
 }
+
+type PasswordReq struct {
+	Password      string `json:"password" binding:"required"`
+	CheckPassword string `json:"check_password" binding:"required,eqfield=Password"`
+}
+
+type CreateAccountReq struct {
+	AccountName   string `json:"account_name" binding:"required"`
+	Password      string `json:"password" binding:"required"`
+	CheckPassword string `json:"check_password" binding:"required,eqfield=Password"`
+	QQ            string `json:"qq"`
+}
+
+type UpdateAccountReq struct {
+	QQ string `json:"qq"`
+}

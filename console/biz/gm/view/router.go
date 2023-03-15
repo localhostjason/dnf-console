@@ -9,6 +9,11 @@ func InitGmRouter(r *ginx.RouterGroup) {
 		accounts.GET("获取账号列表", "list", getAccounts)
 		accounts.GET("获取角色信息", ":id/roles", getRoles)
 
+		accounts.DELETE("删除账号", ":id", deleteAccount)
+		accounts.POST("修改账号密码", ":id/change_password", changePassword)
+		accounts.POST("创建账号", "", createAccount)
+		accounts.PUT("修改账号信息", ":id", updateAccount)
+
 		accounts.POST("充值", ":id/recharge", rechargeAccount)
 		accounts.POST("重置创建角色", ":id/reset_create_charac", resetCreateCharac)
 	}

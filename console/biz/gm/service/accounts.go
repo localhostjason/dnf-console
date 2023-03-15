@@ -118,3 +118,63 @@ func ResetCreateCharac(uid int) error {
 
 	return err
 }
+
+// DeleteAccount 删除账号
+func DeleteAccount(uid int) error {
+	dbx := game_db.DBPools.Get(model.DTaiwan)
+
+	var account model.Accounts
+	err := dbx.Where("UID = ?", uid).First(&account).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return errors.New("账号不存在")
+	}
+
+	roles := getGameRolesByUid(uid)
+	if roles != 0 {
+		return errors.New("该账号存在角色，无法删除")
+	}
+
+	return dbx.Delete(&account).Error
+}
+
+func ChangeAccountPassword(uid int, args *PasswordReq) error {
+	dbx := game_db.DBPools.Get(model.DTaiwan)
+
+	var account model.Accounts
+	err := dbx.Where("UID = ?", uid).First(&account).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return errors.New("账号不存在")
+	}
+
+	account.Password = ToMd5(args.Password)
+	dbx.Save(&account)
+	return nil
+}
+
+func CreateAccount(args *CreateAccountReq) error {
+	dbx := game_db.DBPools.Get(model.DTaiwan)
+	var account model.Accounts
+	err := dbx.Where("accountname = ?", args.AccountName).First(&account).Error
+	if !errors.Is(err, gorm.ErrRecordNotFound) {
+		return errors.New("账号已存在")
+	}
+
+	newAccount := &model.Accounts{
+		AccountName: args.AccountName,
+		Password:    ToMd5(args.Password),
+		QQ:          args.QQ,
+	}
+	return dbx.Debug().Create(newAccount).Error
+}
+
+func UpdateAccountInfo(uid int, args *UpdateAccountReq) error {
+	dbx := game_db.DBPools.Get(model.DTaiwan)
+	var account model.Accounts
+	err := dbx.Where("UID = ?", uid).First(&account).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return errors.New("账号不存在")
+	}
+
+	account.QQ = args.QQ
+	return dbx.Save(&account).Error
+}

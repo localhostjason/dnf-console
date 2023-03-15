@@ -4,33 +4,42 @@
       <el-button type="primary" @click="reg">注册账号</el-button>
     </el-row>
     <el-row>
-      <el-table v-loading="state.loading" :data="state.data" ref="tableRef" border>
-        <el-table-column prop="uid" label="UID" width="180" />
-        <el-table-column prop="account_name" label="账号名" width="200" />
-        <el-table-column prop="roles" label="创建角色总数" width="120" align="center" />
-        <el-table-column prop="cera_point" label="D点" width="180">
+      <el-table v-loading="state.loading" :data="state.data" ref="tableRef" border fit>
+        <el-table-column prop="uid" label="UID" width="120" />
+        <el-table-column prop="account_name" label="账号名" width="150" />
+        <el-table-column prop="roles" label="角色总数" width="100">
           <template #default="scope">
-            <span>{{ formatPrice(scope.row.cera_point) }}</span>
+            <span>{{ scope.row.roles }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="cera" label="D币" width="180">
+        <el-table-column prop="cera_point" label="D点" width="120">
           <template #default="scope">
-            <span>{{ formatPrice(scope.row.cera) }}</span>
+            <span v-if="scope.row.cera_point">{{ formatPrice(scope.row.cera_point) }}</span>
+            <span v-else>-</span>
           </template>
         </el-table-column>
-        <el-table-column prop="money" label="账号金库存款" width="180">
+        <el-table-column prop="cera" label="D币" width="120">
           <template #default="scope">
-            <span>{{ formatPrice(scope.row.money) }}</span>
+            <span v-if="scope.row.cera">{{ formatPrice(scope.row.cera) }}</span>
+            <span v-else>-</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="right">
+        <el-table-column prop="money" label="账号金库存款" width="150">
+          <template #default="scope">
+            <span v-if="scope.row.money">{{ formatPrice(scope.row.money) }}</span>
+            <span v-else>-</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="qq" label="QQ" />
+        <el-table-column label="操作" align="right" width="300px">
           <template #default="scope">
             <el-button type="primary" link @click="recharge(scope.row)" size="small">充值</el-button>
             <el-button type="primary" link @click="resetCreateCharacHandler(scope.row)" size="small"
-              >重置创建角色</el-button
-            >
-            <el-button type="primary" link @click="updatePwd" size="small">修改密码</el-button>
-            <el-button type="primary" link @click="deleteAccount" size="small">删除</el-button>
+              >重置创建角色
+            </el-button>
+            <el-button type="primary" link @click="editAccount(scope.row)" size="small">编辑</el-button>
+            <el-button type="primary" link @click="updatePwd(scope.row)" size="small">修改密码</el-button>
+            <el-button type="primary" link @click="deleteAccountHandler(scope.row)" size="small">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -49,17 +58,23 @@
     </el-row>
 
     <recharge-dialog ref="rechargeDialogRef" @reloadAccount="getAccountList"></recharge-dialog>
+    <change-password ref="changePasswordRef" @reloadAccount="getAccountList"></change-password>
+    <edit-account-dialog ref="editAccountDialogRef" @reloadAccount="getAccountList"></edit-account-dialog>
+    <create-account-dialog ref="createAccountDialogRef" @reloadAccount="getAccountList"></create-account-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import { getAccounts, resetCreateCharac } from '@/api/gm/accounts'
+import { getAccounts, resetCreateCharac, deleteAccount } from '@/api/gm/accounts'
 import { reactive, ref } from 'vue'
-import { AccountState, FilterAccountForm, Account } from '@/views/accounts/list/model'
+import { AccountState, FilterAccountForm, Account, AccountDetail } from '@/views/accounts/list/model/model'
 import { PageQuery } from '@/models/page'
 import { successMessage, warnMessage } from '@/utils/element/message'
 import RechargeDialog from './components/RechargeDialog'
 import { confirmWarning } from '@/utils/element/messageBox'
+import ChangePassword from './components/ChangePassword'
+import EditAccountDialog from './components/EditAccountDialog'
+import CreateAccountDialog from './components/CreateAccountDialog'
 
 // define
 const state = reactive<AccountState>({
@@ -115,16 +130,31 @@ function formatPrice(price) {
   }
 }
 
-const reg = () => {
-  warnMessage('未实现')
+// 编辑用户
+const editAccountDialogRef = ref()
+const editAccount = (row: AccountDetail) => {
+  editAccountDialogRef.value.showAccountDialog(row)
 }
 
-const updatePwd = () => {
-  warnMessage('未实现')
+// 创建账号
+const createAccountDialogRef = ref()
+const reg = (row: AccountDetail) => {
+  createAccountDialogRef.value.showCreateAccountDialog()
 }
 
-const deleteAccount = () => {
-  warnMessage('未实现')
+// 修改密码
+const changePasswordRef = ref<any>(null)
+const updatePwd = (row: AccountDetail) => {
+  changePasswordRef.value.showAccountPasswordDialog(row)
+}
+
+const deleteAccountHandler = async (row: AccountDetail) => {
+  try {
+    await confirmWarning('此操作将永久删除该账号，是否继续？')
+    await deleteAccount(row.uid)
+    successMessage('删除成功')
+    await getAccountList()
+  } catch (e) {}
 }
 
 // 充值

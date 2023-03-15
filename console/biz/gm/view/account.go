@@ -32,3 +32,39 @@ func resetCreateCharac(c *gin.Context) {
 	uv.PEIf(E_RESET_CREATE_CHARAC, err)
 	c.Status(201)
 }
+
+func deleteAccount(c *gin.Context) {
+	uid := uv.PPID(c, "id")
+	err := service.DeleteAccount(uid)
+	uv.PEIf(E_ACCOUNT_DELETE, err)
+	c.Status(201)
+}
+
+func changePassword(c *gin.Context) {
+	args := &service.PasswordReq{}
+	uv.PB(c, args)
+
+	uid := uv.PPID(c, "id")
+	err := service.ChangeAccountPassword(uid, args)
+	uv.PEIf(E_ACCOUNT_CHANGE_PASSWORD, err)
+	c.Status(201)
+}
+
+func createAccount(c *gin.Context) {
+	args := &service.CreateAccountReq{}
+	uv.PB(c, args)
+
+	err := service.CreateAccount(args)
+	uv.PEIf(E_ACCOUNT_CREARE, err)
+	c.Status(201)
+}
+
+func updateAccount(c *gin.Context) {
+	args := &service.UpdateAccountReq{}
+	uv.PB(c, args)
+
+	uid := uv.PPID(c, "id")
+	err := service.UpdateAccountInfo(uid, args)
+	uv.PEIf(E_ACCOUNT_UPDATE, err)
+	c.Status(201)
+}

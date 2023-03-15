@@ -3,7 +3,13 @@ package view
 import "github.com/localhostjason/webserver/server/util/ue"
 
 const (
-	E_ACCOUNT_GET   = "E_ACCOUNT_GET"
+	E_ACCOUNT_GET = "E_ACCOUNT_GET"
+
+	E_ACCOUNT_DELETE          = "E_ACCOUNT_DELETE"
+	E_ACCOUNT_CHANGE_PASSWORD = "E_ACCOUNT_CHANGE_PASSWORD"
+	E_ACCOUNT_CREARE          = "E_ACCOUNT_CREARE"
+	E_ACCOUNT_UPDATE          = "E_ACCOUNT_UPDATE"
+
 	E_ROLES_GET     = "E_ROLES_GET"
 	E_TASKS_GET     = "E_TASKS_GET"
 	E_TASKS_UPDATE  = "E_TASKS_UPDATE"
@@ -15,7 +21,12 @@ const (
 )
 
 var eMap = map[string]ue.Error{
-	E_ACCOUNT_GET:         {Code: E_ACCOUNT_GET, Desc: "获取账号错误", Msg: "%v"},
+	E_ACCOUNT_GET:             {Code: E_ACCOUNT_GET, Desc: "获取账号错误", Msg: "%v"},
+	E_ACCOUNT_DELETE:          {Code: E_ACCOUNT_GET, Desc: "删除账号错误", Msg: "%v"},
+	E_ACCOUNT_CHANGE_PASSWORD: {Code: E_ACCOUNT_CHANGE_PASSWORD, Desc: "修改账号密码错误", Msg: "%v"},
+	E_ACCOUNT_CREARE:          {Code: E_ACCOUNT_CREARE, Desc: "创建账号错误", Msg: "%v"},
+	E_ACCOUNT_UPDATE:          {Code: E_ACCOUNT_UPDATE, Desc: "修改账号错误", Msg: "%v"},
+
 	E_ROLES_GET:           {Code: E_ROLES_GET, Desc: "获取角色错误", Msg: "%v"},
 	E_TASKS_GET:           {Code: E_TASKS_GET, Desc: "获取任务错误", Msg: "%v"},
 	E_TASKS_UPDATE:        {Code: E_TASKS_UPDATE, Desc: "更新任务错误", Msg: "%v"},

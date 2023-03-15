@@ -11,7 +11,7 @@
 import PanelTitle from '@/components/PanelTitle'
 import AccountTable from './table'
 import FilterAccount from './filter'
-import { FilterAccountForm } from '@/views/accounts/list/model'
+import { FilterAccountForm } from '@/views/accounts/list/model/model'
 import { ref } from 'vue'
 
 const accountTableRef = ref(null)
