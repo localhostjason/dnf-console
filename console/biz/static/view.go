@@ -1,15 +1,17 @@
 package static
 
 import (
-	"github.com/localhostjason/webserver/server/config"
+	"os"
 	"path/filepath"
 
 	"github.com/gin-gonic/gin"
 )
 
 func AddStaticToRouter(r *gin.Engine) {
+	exeDir, _ := os.Getwd()
+
 	r.GET("/", redirectRoot)
-	r.Static("/static", filepath.Join(config.RootDir, "web", "static"))
+	r.Static("/static", filepath.Join(exeDir, "web", "static"))
 }
 
 func redirectRoot(c *gin.Context) {
