@@ -39,6 +39,7 @@ type RechargeReq struct {
 type RoleResult struct {
 	model.CharacInfo
 	Money int `json:"money"`
+	QP    int `json:"QP"`
 }
 
 type PasswordReq struct {
@@ -55,4 +56,8 @@ type CreateAccountReq struct {
 
 type UpdateAccountReq struct {
 	QQ string `json:"qq"`
+}
+
+type UpdateQpReq struct {
+	QP int `json:"qp"`
 }

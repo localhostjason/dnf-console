@@ -15,6 +15,7 @@ export type Role = {
   lev: string
   create_time: string
   money: number
+  QP: number
 }
 
 export type RoleState = {

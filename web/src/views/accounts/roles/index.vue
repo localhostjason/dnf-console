@@ -9,7 +9,7 @@
         </panel-step>
 
         <panel-step num="2" title="角色信息" is-last>
-          <roles-table :data="state.data" :loading="state.loading"></roles-table>
+          <roles-table :data="state.data" :loading="state.loading" @reloadRoles="getRoleList"></roles-table>
         </panel-step>
       </div>
     </div>
@@ -31,7 +31,13 @@ const state = reactive<RoleState>({
   loading: false
 })
 
-const setUid = async (uid: number) => {
+let uid: number = null
+const setUid = (id: number) => {
+  uid = id
+  getRoleList()
+}
+
+const getRoleList = async () => {
   try {
     state.loading = true
     state.data = await getRoles(uid)

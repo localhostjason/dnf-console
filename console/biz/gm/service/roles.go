@@ -24,6 +24,7 @@ func GetRoles(uid int) ([]RoleResult, error) {
 		result = append(result, RoleResult{
 			CharacInfo: info,
 			Money:      getMoneyByRole(info.CharacNo),
+			QP:         getQpByRole(info.CharacNo),
 		})
 	}
 
@@ -40,4 +41,21 @@ func getMoneyByRole(characNo int) int {
 	var data _R
 	dbx.Table("inventory").Where("charac_no = ?", characNo).Take(&data)
 	return data.Money
+}
+
+func getQpByRole(characNo int) int {
+	dbx := game_db.DBPools.Get(model.TaiwanCain)
+	type _R struct {
+		QP int `json:"qp"`
+	}
+	var data _R
+	dbx.Table("charac_quest_shop").Where("charac_no = ?", characNo).Take(&data)
+	return data.QP
+}
+
+func UpdateQp(characNo int, args *UpdateQpReq) error {
+	dbx := game_db.DBPools.Get(model.TaiwanCain)
+	return dbx.Table("charac_quest_shop").Where("charac_no = ?", characNo).Updates(map[string]interface{}{
+		"qp": args.QP,
+	}).Error
 }

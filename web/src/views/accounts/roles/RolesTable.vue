@@ -8,6 +8,7 @@
           <span>{{ formatPrice(scope.row.money) }}</span>
         </template>
       </el-table-column>
+      <el-table-column prop="QP" label="QP" width="120"></el-table-column>
       <el-table-column prop="create_time" label="创建时间" width="180">
         <template #default="scope">
           <span>{{ dateFormat(scope.row.create_time) }}</span>
@@ -15,14 +16,22 @@
       </el-table-column>
       <el-table-column prop="lev" label="等级"></el-table-column>
       <el-table-column prop="m_id" label="uid" width="120" />
+      <el-table-column label="操作" width="120" align="right">
+        <template #default="scope">
+          <el-button type="primary" link size="small" @click="changeQp(scope.row)">修改QP</el-button>
+        </template>
+      </el-table-column>
     </el-table>
+
+    <role-qp-dialog ref="qpDialogRef" @reloadRoles="toReloadRoles"></role-qp-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { RoleState, Role } from '@/views/accounts/roles/model'
 import { dateFormat, formatPrice } from '@/utils'
+import RoleQpDialog from './components/RoleQPDialog'
 
 // const state = reactive<RoleState>({
 //   data: [],
@@ -41,6 +50,17 @@ defineProps({
     default: false
   }
 })
+
+const qpDialogRef = ref()
+const changeQp = (row: Role) => {
+  qpDialogRef.value.showQpDialog(row)
+}
+
+const toReloadRoles = () => {
+  emit('reloadRoles')
+}
+
+const emit = defineEmits(['reloadRoles'])
 </script>
 
 <style scoped></style>
