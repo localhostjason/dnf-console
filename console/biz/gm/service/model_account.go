@@ -17,7 +17,8 @@ type AccountResult struct {
 }
 
 type AccountFilter struct {
-	Uid string `form:"uid"`
+	Uid      string `form:"uid"`
+	HasRoles bool   `form:"has_roles"`
 }
 
 func (q AccountFilter) FilterQuery(dbx *gorm.DB) (tx *gorm.DB) {

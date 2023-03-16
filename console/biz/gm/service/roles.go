@@ -17,7 +17,7 @@ func GetRoles(uid int) ([]RoleResult, error) {
 
 	var data = make([]model.CharacInfo, 0)
 	dbx := game_db.DBPools.Get(model.TaiwanCain)
-	dbx.Table("charac_info").Where("m_id = ?", uid).Find(&data)
+	dbx.Table("charac_info").Where("m_id = ? AND delete_flag = ?", uid, 0).Find(&data)
 
 	var result = make([]RoleResult, 0)
 	for _, info := range data {

@@ -20,6 +20,10 @@ func GetAccounts(q *AccountFilter, pi *uv.PagingIn, order *uv.Order) ([]AccountR
 	for _, info := range lst {
 		roles := getGameRolesByUid(info.Uid)
 
+		if q.HasRoles && roles == 0 {
+			continue
+		}
+
 		money, capacity := getGameMoneyByUid(info.Uid)
 		ceraPoint, cera := getCashByUid(info.Uid)
 
@@ -40,7 +44,7 @@ func getGameRolesByUid(uid int) int64 {
 	dbx := game_db.DBPools.Get(model.TaiwanCain)
 
 	var total int64
-	dbx.Table("charac_info").Where("m_id = ?", uid).Count(&total)
+	dbx.Table("charac_info").Where("m_id = ? AND delete_flag = ?", uid, 0).Count(&total)
 	return total
 }
 
