@@ -1,6 +1,9 @@
 <template>
   <div>
     <el-row>
+      <span class="text-warning sm">注：觉醒任务无法完成，需要手动，或者使用 觉醒秘籍</span>
+    </el-row>
+    <el-row>
       <el-button type="primary" size="small" @click="doneTask" :disabled="!multipleSelection.length"
         >批量完成
       </el-button>
