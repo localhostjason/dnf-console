@@ -81,7 +81,7 @@ export default {
   }
 
   .last-step {
-    margin-bottom: 20px;
+    margin-bottom: 28px;
 
     ~ div {
       background: #fff;
