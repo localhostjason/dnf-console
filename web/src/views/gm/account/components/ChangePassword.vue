@@ -39,8 +39,8 @@
 <script setup lang="ts">
 import { nextTick, reactive, ref } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
-import { ChangePasswordForm } from '@/views/accounts/list/model/info'
-import { AccountDetail } from '@/views/accounts/list/model/model'
+import { ChangePasswordForm } from '@/views/gm/account/model/info'
+import { AccountDetail } from '@/views/gm/account/model/model'
 import { validate } from '@/utils/element/form'
 import { updateAccountPasswordByUid } from '@/api/gm/accounts'
 import { successMessage } from '@/utils/element/message'

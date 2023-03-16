@@ -39,7 +39,7 @@ import TaskDetail from './TaskDetail'
 
 import { getRoles } from '@/api/gm/role'
 import { reactive, ref } from 'vue'
-import { RoleState } from '@/views/accounts/roles/model'
+import { RoleState } from '@/views/gm/roles/model'
 import { getTasks } from '@/api/gm/task'
 import { warnMessage } from '@/utils/element/message'
 import { TaskState } from './model'

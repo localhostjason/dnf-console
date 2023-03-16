@@ -90,3 +90,18 @@
     display: none;
   }
 }
+
+.el-table th {
+  font-weight: normal;
+  color: #666;
+}
+
+.el-tabs {
+  > .el-tabs__header {
+    .el-tabs__item {
+      margin: -1px -1px 0px 0;
+    }
+  }
+}
+
+

@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { RoleState, Role } from '@/views/accounts/roles/model'
+import { RoleState, Role } from '@/views/gm/roles/model'
 import { dateFormat, formatPrice } from '@/utils'
 import RoleQpDialog from './components/RoleQPDialog'
 import RolePvpDialog from './components/RolePvpDialog'

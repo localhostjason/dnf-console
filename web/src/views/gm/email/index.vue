@@ -33,7 +33,7 @@ import EmailForm from './EmailForm'
 
 import { getRoles } from '@/api/gm/role'
 import { reactive, ref } from 'vue'
-import { RoleState } from '@/views/accounts/roles/model'
+import { RoleState } from '@/views/gm/roles/model'
 import RoleTable from '../tasks/RoleTable'
 import { any } from 'vue-types'
 

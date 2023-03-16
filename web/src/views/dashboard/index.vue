@@ -1,48 +1,30 @@
 <template>
   <div class="dashboard-container">
-    <!--<panel-title title="概览" is-line></panel-title>-->
+    <div class="dash-panel">
+      <dash-header></dash-header>
+      <dash-body></dash-body>
+      <dash-foot></dash-foot>
+    </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Dashboard',
-  directives: {},
-  components: {},
-  computed: {},
-  data() {
-    return {}
-  },
-  created() {},
-  methods: {}
-}
+<script setup lang="ts">
+import DashHeader from './components/DashHeader'
+import DashBody from './components/DashBody'
+import DashFoot from './components/DashFoot'
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
-.el-row {
-  .el-col {
-    margin: 10px 0;
+<style lang="scss" scoped>
+@import './dash.scss';
+
+.dashboard-container {
+  padding: 0;
+  background: #f6f8f9;
+  height: 100%;
+  margin: 0 -15px;
+
+  .dash-panel {
+    padding: 20px;
   }
-}
-
-.text {
-  font-size: 14px;
-}
-
-.item {
-  margin-bottom: 18px;
-}
-
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: '';
-}
-
-.clearfix:after {
-  clear: both;
-}
-
-.box-card {
 }
 </style>

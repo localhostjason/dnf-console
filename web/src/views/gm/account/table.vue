@@ -67,7 +67,7 @@
 <script setup lang="ts">
 import { getAccounts, resetCreateCharac, deleteAccount } from '@/api/gm/accounts'
 import { reactive, ref } from 'vue'
-import { AccountState, FilterAccountForm, Account, AccountDetail } from '@/views/accounts/list/model/model'
+import { AccountState, FilterAccountForm, Account, AccountDetail } from '@/views/gm/account/model/model'
 import { PageQuery } from '@/models/page'
 import { successMessage, warnMessage } from '@/utils/element/message'
 import RechargeDialog from './components/RechargeDialog'

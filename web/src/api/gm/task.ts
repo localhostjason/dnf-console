@@ -1,5 +1,5 @@
 import { http } from '@/utils/http'
-import { Task } from '@/views/accounts/tasks/model'
+import { Task } from '@/views/gm/tasks/model'
 
 export const getTasks = (characNo: number): Promise<Task[]> => {
   return http.request({

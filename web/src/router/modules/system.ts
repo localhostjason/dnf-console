@@ -8,7 +8,7 @@ const systemRoutes: Array<AppRouteRecordRaw> = [
     component: LAYOUT,
     meta: {
       title: '系统管理',
-      icon: 'people'
+      icon: 'lock'
     },
     redirect: 'user_list',
     children: [
@@ -18,7 +18,7 @@ const systemRoutes: Array<AppRouteRecordRaw> = [
         component: () => import('@/views/user/list/index.vue'),
         meta: {
           title: '用户管理',
-          icon: 'person'
+          icon: 'people'
         }
       },
       {

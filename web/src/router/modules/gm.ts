@@ -8,44 +8,44 @@ const accountsRoutes: Array<AppRouteRecordRaw> = [
     component: LAYOUT,
     meta: {
       title: 'GM管理',
-      icon: 'people'
+      icon: 'cog'
     },
     redirect: 'accounts',
     children: [
       {
         path: 'accounts',
         name: 'GmAccounts',
-        component: () => import('@/views/accounts/list/index.vue'),
+        component: () => import('@/views/gm/account/index.vue'),
         meta: {
           title: '账号管理',
-          icon: 'person'
+          icon: 'list'
         }
       },
       {
         path: 'roles',
         name: 'GmRoles',
-        component: () => import('@/views/accounts/roles/index.vue'),
+        component: () => import('@/views/gm/roles/index.vue'),
         meta: {
           title: '角色管理',
-          icon: 'person'
+          icon: 'fork'
         }
       },
       {
         path: 'tasks',
         name: 'GmTasks',
-        component: () => import('@/views/accounts/tasks/index.vue'),
+        component: () => import('@/views/gm/tasks/index.vue'),
         meta: {
           title: '任务清理',
-          icon: 'person'
+          icon: 'timer'
         }
       },
       {
         path: 'email',
         name: 'GmEmail',
-        component: () => import('@/views/accounts/email/index.vue'),
+        component: () => import('@/views/gm/email/index.vue'),
         meta: {
           title: '邮件工具',
-          icon: 'person'
+          icon: 'transfer'
         }
       },
       {

@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
-import { AccountOptions, SelectForm } from '@/views/accounts/roles/model'
+import { AccountOptions, SelectForm } from '@/views/gm/roles/model'
 import { getAccounts } from '@/api/gm/accounts'
 import { validate } from '@/utils/element/form'
 

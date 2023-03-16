@@ -1,6 +1,6 @@
 import { http } from '@/utils/http'
-import { Account, AccountDetail, RechargeForm } from '@/views/accounts/list/model/model'
-import { ChangePasswordForm, CreateAccountForm, EditAccountForm } from '@/views/accounts/list/model/info'
+import { Account, AccountDetail, RechargeForm } from '@/views/gm/account/model/model'
+import { ChangePasswordForm, CreateAccountForm, EditAccountForm } from '@/views/gm/account/model/info'
 
 export const getAccounts = <T = Account | AccountDetail[]>(params: any): Promise<T> => {
   return http.request({

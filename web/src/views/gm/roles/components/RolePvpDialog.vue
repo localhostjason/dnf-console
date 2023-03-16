@@ -37,12 +37,12 @@
 <script setup lang="ts">
 import { nextTick, reactive, ref } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
-import { QpForm } from '@/views/accounts/roles/model/qp'
-import { Role } from '@/views/accounts/roles/model'
+import { QpForm } from '@/views/gm/roles/model/qp'
+import { Role } from '@/views/gm/roles/model'
 import { validate } from '@/utils/element/form'
 import { updatePvpByRole, updateQPbyRole } from '@/api/gm/role'
 import { successMessage } from '@/utils/element/message'
-import { PvpForm } from '@/views/accounts/roles/model/pvp'
+import { PvpForm } from '@/views/gm/roles/model/pvp'
 import { setFormData } from '@/utils'
 
 const dialog = reactive({

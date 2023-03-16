@@ -15,7 +15,7 @@
             <el-input v-model.number="form.seperate_upgrade"></el-input>
           </el-form-item>
 
-          <el-form-item label="强化/增幅等级" prop="upgrade">
+          <el-form-item label="强化等级" prop="upgrade">
             <el-input v-model.number="form.upgrade"></el-input>
           </el-form-item>
 
@@ -96,7 +96,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
-import { Email, FilterGold } from '@/views/accounts/email/model'
+import { Email, FilterGold } from '@/views/gm/email/model'
 import { validate } from '@/utils/element/form'
 import { sendEmailByRole, getGolds } from '@/api/gm/email'
 import { errorMessage, successMessage } from '@/utils/element/message'

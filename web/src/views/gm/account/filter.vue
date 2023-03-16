@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { FormInstance } from 'element-plus'
-import { FilterAccountForm } from '@/views/accounts/list/model/model'
+import { FilterAccountForm } from '@/views/gm/account/model/model'
 
 const formRef = ref<FormInstance>()
 const form = reactive<FilterAccountForm>({

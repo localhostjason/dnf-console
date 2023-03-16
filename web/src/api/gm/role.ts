@@ -1,6 +1,6 @@
 import { http } from '@/utils/http'
-import { QpForm } from '@/views/accounts/roles/model/qp'
-import { PvpForm } from '@/views/accounts/roles/model/pvp'
+import { QpForm } from '@/views/gm/roles/model/qp'
+import { PvpForm } from '@/views/gm/roles/model/pvp'
 
 export const getRoles = (id: number): Promise<any[]> => {
   return http.request({

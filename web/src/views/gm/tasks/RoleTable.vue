@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { defineExpose, reactive, ref } from 'vue'
-import { RoleState, Role } from '@/views/accounts/roles/model'
+import { RoleState, Role } from '@/views/gm/roles/model'
 import { dateFormat } from '@/utils'
 
 const characNo = ref<number>(null)

@@ -14,7 +14,7 @@ body {
   text-rendering: optimizeLegibility;
   //font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
   //Microsoft YaHei, Arial, sans-serif;
-  font-family: PingFang SC,Arial,Microsoft YaHei,sans-serif;
+  //font-family: PingFang SC,Arial,Microsoft YaHei,sans-serif;
 }
 
 html {
@@ -176,4 +176,9 @@ fieldset {
   .el-tag--small {
     padding-left: 0;
   }
+}
+
+
+.fs-14 {
+  font-size: 14px;
 }

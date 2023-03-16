@@ -65,7 +65,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
-import { AccountDetail, RechargeForm } from '@/views/accounts/list/model/model'
+import { AccountDetail, RechargeForm } from '@/views/gm/account/model/model'
 import { assignWith } from 'lodash'
 import { rechargeByUid } from '@/api/gm/accounts'
 import { successMessage } from '@/utils/element/message'
