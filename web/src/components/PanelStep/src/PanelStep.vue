@@ -2,7 +2,7 @@
   <div>
     <el-row :class="isLast ? 'last-step' : ''">
       <el-col :span="24">
-        <div class="bot" style="height: 20px; margin-bottom: 13px; background: #fff">
+        <div class="bot" style="height: 20px; margin-bottom: 10px; background: #fff">
           <div class="bline-dotted">
             <div class="category-index">{{ num }}</div>
             <div class="category-name">{{ title }}</div>
@@ -11,8 +11,10 @@
       </el-col>
     </el-row>
     <div>
-      <div style="padding: 10px 30px; margin-bottom: 30px">
-        <slot></slot>
+      <div style="padding: 10px 30px 20px">
+        <div :class="isLast ? 'last-div' : ''">
+          <slot></slot>
+        </div>
       </div>
     </div>
   </div>
@@ -39,10 +41,6 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-//.bline-dotted {
-//  border-bottom: 1px dotted #000;
-//}
-
 .category-index {
   position: absolute;
   padding-top: 2px;
@@ -81,12 +79,14 @@ export default {
   }
 
   .last-step {
-    margin-bottom: 28px;
-
     ~ div {
       background: #fff;
-      margin-top: -30px;
+      margin-top: -25px;
     }
+  }
+
+  .last-div {
+    padding: 20px 0 0 0;
   }
 
   .bline-dotted {
