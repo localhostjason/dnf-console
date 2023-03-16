@@ -60,7 +60,7 @@ export default {
 .category-name {
   position: absolute;
   left: 26px;
-  font-size: 12px;
+  font-size: 14px;
   top: 1px;
   background: #fff;
   height: 28px;
