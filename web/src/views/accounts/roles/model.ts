@@ -16,6 +16,13 @@ export type Role = {
   create_time: string
   money: number
   QP: number
+  pvp: RolePvp
+}
+
+export type RolePvp = {
+  win: number
+  pvp_grade: number
+  pvp_point: number
 }
 
 export type RoleState = {

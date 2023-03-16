@@ -25,6 +25,7 @@ func GetRoles(uid int) ([]RoleResult, error) {
 			CharacInfo: info,
 			Money:      getMoneyByRole(info.CharacNo),
 			QP:         getQpByRole(info.CharacNo),
+			Pvp:        getPvpByRole(info.CharacNo),
 		})
 	}
 
@@ -53,9 +54,26 @@ func getQpByRole(characNo int) int {
 	return data.QP
 }
 
+func getPvpByRole(characNo int) PvpResult {
+	dbx := game_db.DBPools.Get(model.TaiwanCain)
+
+	var data PvpResult
+	dbx.Table("pvp_result").Where("charac_no = ?", characNo).Take(&data)
+	return data
+}
+
 func UpdateQp(characNo int, args *UpdateQpReq) error {
 	dbx := game_db.DBPools.Get(model.TaiwanCain)
 	return dbx.Table("charac_quest_shop").Where("charac_no = ?", characNo).Updates(map[string]interface{}{
 		"qp": args.QP,
+	}).Error
+}
+
+func UpdatePvp(characNo int, args *UpdatePvpReq) error {
+	dbx := game_db.DBPools.Get(model.TaiwanCain)
+	return dbx.Table("pvp_result").Where("charac_no = ?", characNo).Updates(map[string]interface{}{
+		"win":       args.Win,
+		"pvp_grade": args.PvpGrade,
+		"pvp_point": args.PvpPoint,
 	}).Error
 }

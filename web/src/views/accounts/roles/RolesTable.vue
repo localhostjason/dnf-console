@@ -15,15 +15,23 @@
         </template>
       </el-table-column>
       <el-table-column prop="lev" label="等级"></el-table-column>
-      <el-table-column prop="m_id" label="uid" width="120" />
-      <el-table-column label="操作" width="120" align="right">
+      <el-table-column prop="pvp.pvp_grade" label="PK等级" width="100">
+        <template #default="scope">
+          <span v-if="scope.row.pvp.pvp_grade">{{ scope.row.pvp.pvp_grade }}</span>
+          <span v-else>-</span>
+        </template>
+      </el-table-column>
+      <!--      <el-table-column prop="m_id" label="uid" width="120" />-->
+      <el-table-column label="操作" width="180" align="right">
         <template #default="scope">
           <el-button type="primary" link size="small" @click="changeQp(scope.row)">修改QP</el-button>
+          <el-button type="primary" link size="small" @click="changePvpLev(scope.row)">修改PK段位</el-button>
         </template>
       </el-table-column>
     </el-table>
 
     <role-qp-dialog ref="qpDialogRef" @reloadRoles="toReloadRoles"></role-qp-dialog>
+    <role-pvp-dialog ref="pvpDialogRef" @reloadRoles="toReloadRoles"></role-pvp-dialog>
   </div>
 </template>
 
@@ -32,6 +40,7 @@ import { reactive, ref } from 'vue'
 import { RoleState, Role } from '@/views/accounts/roles/model'
 import { dateFormat, formatPrice } from '@/utils'
 import RoleQpDialog from './components/RoleQPDialog'
+import RolePvpDialog from './components/RolePvpDialog'
 
 // const state = reactive<RoleState>({
 //   data: [],
@@ -54,6 +63,11 @@ defineProps({
 const qpDialogRef = ref()
 const changeQp = (row: Role) => {
   qpDialogRef.value.showQpDialog(row)
+}
+
+const pvpDialogRef = ref()
+const changePvpLev = (row: Role) => {
+  pvpDialogRef.value.showPvpDialog(row)
 }
 
 const toReloadRoles = () => {

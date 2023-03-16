@@ -21,6 +21,7 @@ func InitGmRouter(r *ginx.RouterGroup) {
 	roles := r.Group("角色管理", "roles")
 	{
 		roles.PUT("修改QP", ":id/qp", changeQp)
+		roles.PUT("修改pk段位", ":id/pvp", changePvp)
 
 		roles.GET("获取任务列表", ":id/tasks", getRoleTasks)
 		roles.PUT("更新任务列表", ":id/tasks", updateRoleTasks)

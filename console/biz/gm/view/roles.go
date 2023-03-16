@@ -22,3 +22,13 @@ func changeQp(c *gin.Context) {
 	uv.PEIf(E_ROLES_UPDATE_QP, err)
 	c.Status(201)
 }
+
+func changePvp(c *gin.Context) {
+	args := &service.UpdatePvpReq{}
+	uv.PB(c, args)
+
+	characNo := uv.PPID(c, "id")
+	err := service.UpdatePvp(characNo, args)
+	uv.PEIf(E_ROLES_UPDATE_PVP, err)
+	c.Status(201)
+}

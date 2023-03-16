@@ -38,8 +38,15 @@ type RechargeReq struct {
 
 type RoleResult struct {
 	model.CharacInfo
-	Money int `json:"money"`
-	QP    int `json:"QP"`
+	Money int       `json:"money"`
+	QP    int       `json:"QP"`
+	Pvp   PvpResult `json:"pvp"`
+}
+
+type PvpResult struct {
+	Win      int `json:"win"`
+	PvpGrade int `json:"pvp_grade"`
+	PvpPoint int `json:"pvp_point"`
 }
 
 type PasswordReq struct {
@@ -60,4 +67,10 @@ type UpdateAccountReq struct {
 
 type UpdateQpReq struct {
 	QP int `json:"qp"`
+}
+
+type UpdatePvpReq struct {
+	Win      int `json:"win"`
+	PvpGrade int `json:"pvp_grade"`
+	PvpPoint int `json:"pvp_point"`
 }
