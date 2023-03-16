@@ -48,7 +48,7 @@ const loading = ref<boolean>(false)
 
 const getAccountsOptions = async () => {
   loading.value = true
-  options.data = await getAccounts({})
+  options.data = await getAccounts({ has_roles: true })
   loading.value = false
 }
 
