@@ -18,12 +18,14 @@ func InitGmRouter(r *ginx.RouterGroup) {
 		accounts.POST("重置创建角色", ":id/reset_create_charac", resetCreateCharac)
 	}
 
-	tasks := r.Group("任务清理", "roles")
+	roles := r.Group("角色管理", "roles")
 	{
-		tasks.GET("获取任务列表", ":id/tasks", getRoleTasks)
-		tasks.PUT("更新任务列表", ":id/tasks", updateRoleTasks)
+		roles.PUT("修改QP", ":id/qp", changeQp)
 
-		tasks.POST("发送邮件", ":id/email", sendEmail) // id === charac no
+		roles.GET("获取任务列表", ":id/tasks", getRoleTasks)
+		roles.PUT("更新任务列表", ":id/tasks", updateRoleTasks)
+
+		roles.POST("发送邮件", ":id/email", sendEmail) // id === charac no
 	}
 
 	gold := r.Group("物品", "gold")
