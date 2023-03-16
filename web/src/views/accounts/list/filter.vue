@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form :inline="true" :model="form" ref="formRef" label-width="50px">
+    <el-form :inline="true" :model="form" ref="formRef" label-width="50px" @submit.native.prevent>
       <div>
         <el-form-item label="uid:" prop="uid">
           <el-input v-model="form.uid" clearable></el-input>

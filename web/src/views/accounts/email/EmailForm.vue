@@ -56,7 +56,7 @@
           </template>
           <div>
             <el-row>
-              <el-form :inline="true" :model="argQuery" ref="filterFormRef" label-width="100px">
+              <el-form :inline="true" :model="argQuery" ref="filterFormRef" label-width="100px" @submit.native.prevent>
                 <div>
                   <el-form-item label="物品名称:" prop="name">
                     <el-input v-model="argQuery.name" clearable></el-input>
