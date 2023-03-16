@@ -6,7 +6,7 @@
           <img src="@/assets/logo.png" style="width: 50px; height: 50px" alt="logo" class="tcxa-logo" />
         </div>
         <div>
-          <img src="@/assets/logo2.png" alt="login" style='height: 272px; padding: 0 10px'/>
+          <img src="@/assets/logo2.png" alt="login" style="height: 272px; padding: 0 10px" />
         </div>
       </el-col>
       <el-col :span="13">
@@ -22,7 +22,7 @@
           >
             <div class="title-container">
               <h3 class="title">
-                <span>VUE3 后台管理系统</span>
+                <span>DNF 后台管理系统</span>
               </h3>
             </div>
 
@@ -51,14 +51,14 @@
                 :prefix-icon="Unlock"
               ></el-input>
               <span class="show-pwd" @click="showPwd">
-              <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'open-eye'" />
-            </span>
+                <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'open-eye'" />
+              </span>
             </el-form-item>
 
             <el-button
               :loading="loading"
               type="primary"
-              style="width: 100%; margin-bottom: 30px;margin-top: 20px"
+              style="width: 100%; margin-bottom: 30px; margin-top: 20px"
               @click.native.prevent="handleLogin(loginForm)"
               size="large"
               >登录
@@ -77,7 +77,7 @@ import { useRouter } from 'vue-router'
 import { getUserInfo, login } from '@/api/user/auth'
 import { ElNotification } from 'element-plus'
 import { useUserStore } from '@/store/modules/user'
-import { Avatar ,Unlock, User } from '@element-plus/icons-vue'
+import { Avatar, Unlock, User } from '@element-plus/icons-vue'
 import { Login } from '@/models/user/auth'
 
 export default defineComponent({
@@ -123,10 +123,10 @@ export default defineComponent({
     }
 
     const showPwd = () => {
-      if (passwordType.value === "password") {
-        passwordType.value = "";
+      if (passwordType.value === 'password') {
+        passwordType.value = ''
       } else {
-        passwordType.value = "password";
+        passwordType.value = 'password'
       }
     }
 
@@ -141,7 +141,7 @@ export default defineComponent({
       Avatar,
       Unlock,
       User,
-      showPwd,
+      showPwd
     }
   }
 })
@@ -156,7 +156,6 @@ $dark_gray: #889aa4;
   height: 100%;
   width: 100%;
 }
-
 
 .svg-container {
   padding: 6px 5px 6px 15px;
