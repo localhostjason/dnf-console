@@ -3,6 +3,7 @@ import { LAYOUT } from '@/router/constant'
 import { AppRouteRecordRaw } from '@/router/types'
 
 import Gm from './modules/gm'
+import Client from './modules/client'
 import SystemRoutes from './modules/system'
 
 /**
@@ -75,7 +76,7 @@ export const basicRoutes: Array<AppRouteRecordRaw> = [
   }
 ]
 
-export const asyncRoutes = [...Gm, ...SystemRoutes]
+export const asyncRoutes = [...Client, ...Gm, ...SystemRoutes]
 
 const r = basicRoutes.concat(asyncRoutes)
 

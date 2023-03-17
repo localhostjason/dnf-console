@@ -1,6 +1,7 @@
 package view
 
 import (
+	client "console/biz/client/view"
 	gm "console/biz/gm/view"
 	"console/biz/middleware"
 	"console/biz/static"
@@ -36,6 +37,7 @@ func SetView(r *gin.Engine) error {
 	routeGroup := ginx.NewRouterGroup(api)
 	{
 		gm.InitGmRouter(routeGroup.Group("GM管理", "gm"))
+		client.InitClientRouter(routeGroup.Group("客户端", "client"))
 
 		user.InitUserRouter(routeGroup.Group("用户管理", "user"))
 	}

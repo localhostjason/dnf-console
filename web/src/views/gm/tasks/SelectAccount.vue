@@ -1,9 +1,10 @@
 <template>
   <div>
-    <el-form :model="form" :rules="rules" ref="formRef" label-width="100px">
+    <el-form :model="form" :rules="rules" ref="formRef" :label-width="labelWidth">
       <el-form-item label="账号ID" prop="uid">
         <el-select
           v-model="form.uid"
+          @change="selectRoles"
           filterable
           clearable
           placeholder="选择账号id"
@@ -18,7 +19,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item>
+      <el-form-item v-if="hasBtn">
         <el-button type="primary" @click="selectRoles" size="small">查询</el-button>
       </el-form-item>
     </el-form>
@@ -26,15 +27,33 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref, toRefs } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
 import { AccountOptions, SelectForm } from '@/views/gm/roles/model'
 import { getAccounts } from '@/api/gm/accounts'
 import { validate } from '@/utils/element/form'
 
+// props
+
+const props = defineProps({
+  hasRole: {
+    type: Boolean,
+    default: true
+  },
+  hasBtn: {
+    type: Boolean,
+    default: true
+  },
+  labelWidth: {
+    type: String,
+    default: '100px'
+  }
+})
+const { hasRole, hasBtn, labelWidth } = toRefs(props)
+
 const formRef = ref<FormInstance>()
 const form = reactive<SelectForm>({
-  uid: null
+  uid: 18000002
 })
 const rules = reactive<FormRules>({
   uid: [{ required: true, message: '请选择账号', trigger: 'blur' }]
@@ -48,7 +67,7 @@ const loading = ref<boolean>(false)
 
 const getAccountsOptions = async () => {
   loading.value = true
-  options.data = await getAccounts({ has_roles: true })
+  options.data = await getAccounts({ has_roles: hasRole.value })
   loading.value = false
 }
 
