@@ -137,8 +137,22 @@ func DeleteAccount(uid int) error {
 	if roles != 0 {
 		return errors.New("该账号存在角色，无法删除")
 	}
+	dbx.Delete(&account)
 
-	return dbx.Delete(&account).Error
+	var result map[string]interface{}
+	dbx.Table("member_info").Where("m_id = ?", uid).Delete(&result)
+	dbx.Table("member_white_account").Where("m_id = ?", uid).Delete(&result)
+
+	dbBilling := game_db.DBPools.Get(model.TaiwanBilling)
+	dbBilling.Table("cash_cera").Where("account = ?", uid).Delete(&result)
+	dbBilling.Table("cash_cera_point").Where("account = ?", uid).Delete(&result)
+
+	dbx2d := game_db.DBPools.Get(model.TaiwanCain2nd)
+	dbx2d.Table("member_avatar_coin").Where("m_id = ?", uid).Delete(&result)
+
+	dbLogin := game_db.DBPools.Get(model.TaiwanLogin)
+	dbLogin.Table("member_login").Where("m_id = ?", uid).Delete(&result)
+	return nil
 }
 
 func ChangeAccountPassword(uid int, args *PasswordReq) error {
@@ -168,7 +182,46 @@ func CreateAccount(args *CreateAccountReq) error {
 		Password:    ToMd5(args.Password),
 		QQ:          args.QQ,
 	}
-	return dbx.Debug().Create(newAccount).Error
+	dbx.Debug().Create(newAccount)
+
+	uid := newAccount.Uid
+	dbx.Table("member_info").Create(map[string]interface{}{
+		"m_id":    uid,
+		"user_id": uid,
+	})
+	dbx.Table("member_white_account").Create(map[string]interface{}{
+		"m_id": uid,
+	})
+
+	now := time.Now()
+	nowStr := now.Format("2006-01-02 15:04:05")
+	dbBilling := game_db.DBPools.Get(model.TaiwanBilling)
+	dbBilling.Table("cash_cera").Create(map[string]interface{}{
+		"account":  uid,
+		"cera":     1000,
+		"mod_tran": 0,
+		"mod_date": nowStr,
+		"reg_date": nowStr,
+	})
+	dbBilling.Table("cash_cera_point").Create(map[string]interface{}{
+		"account":    uid,
+		"cera_point": 0,
+		"mod_tran":   0,
+		"mod_date":   nowStr,
+		"reg_date":   nowStr,
+	})
+
+	dbx2d := game_db.DBPools.Get(model.TaiwanCain2nd)
+	dbx2d.Table("member_avatar_coin").Create(map[string]interface{}{
+		"m_id": uid,
+	})
+
+	dbLogin := game_db.DBPools.Get(model.TaiwanLogin)
+	dbLogin.Table("member_login").Create(map[string]interface{}{
+		"m_id": uid,
+	})
+
+	return nil
 }
 
 func UpdateAccountInfo(uid int, args *UpdateAccountReq) error {
