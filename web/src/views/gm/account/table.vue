@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row>
-      <el-button type="primary" @click="reg">注册账号</el-button>
+      <el-button type="primary" @click="reg" size="small">注册账号</el-button>
     </el-row>
     <el-row>
       <el-table v-loading="state.loading" :data="state.data" ref="tableRef" border fit>
