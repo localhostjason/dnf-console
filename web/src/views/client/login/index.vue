@@ -30,13 +30,13 @@
             <select-account :has-role="false" label-width="120px" :has-btn="false" @setUid="setUid"></select-account>
           </div>
 
-          <el-form-item label="RSA加密公钥:" prop="public_pem">
-            <el-input v-model="form.public_pem"></el-input>
-          </el-form-item>
+          <!--          <el-form-item label="RSA加密公钥:" prop="public_pem">-->
+          <!--            <el-input v-model="form.public_pem"></el-input>-->
+          <!--          </el-form-item>-->
 
-          <el-form-item label="游戏目录:" prop="game_dir">
-            <el-input v-model="form.game_dir"></el-input>
-          </el-form-item>
+          <!--          <el-form-item label="游戏目录:" prop="game_dir">-->
+          <!--            <el-input v-model="form.game_dir"></el-input>-->
+          <!--          </el-form-item>-->
 
           <el-form-item>
             <el-button type="primary" @click="loginClientHandler">登 录</el-button>
@@ -45,10 +45,10 @@
       </el-col>
       <el-col :span="12">
         <fieldset>
-          <h5 style="margin-bottom: 15px; font-size: 13px; font-weight: bold">加密Hash</h5>
+          <h5 style="margin-bottom: 15px; font-size: 13px; font-weight: bold">RSA加密hash</h5>
 
           <div>
-            <el-input type="textarea" v-model="result" :autosize="{ minRows: 8 }"></el-input>
+            <el-input type="textarea" v-model="tokenRef" :autosize="{ minRows: 8 }"></el-input>
           </div>
         </fieldset>
       </el-col>
@@ -76,7 +76,7 @@ const form = reactive<ClientLoginForm>({
   game_dir: ''
 })
 
-const result = ref<any>('')
+const tokenRef = ref<any>('')
 
 const rules = reactive<FormRules>({
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -99,7 +99,8 @@ const loginClientHandler = async () => {
   }
 
   try {
-    await loginClient(form)
+    const { token } = await loginClient(form)
+    tokenRef.value = token
   } catch (e) {}
 
   console.log(111, form)
