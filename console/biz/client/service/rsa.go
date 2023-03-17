@@ -25,7 +25,7 @@ func NewRsa() *Rsa {
 }
 
 // GenRsaKey RSA公钥私钥产生
-func (r *Rsa) genRsaKey(bits int) error {
+func (r *Rsa) GenRsaKey(bits int) error {
 	// 生成私钥文件
 	privateKey, err := rsa.GenerateKey(rand.Reader, bits)
 	if err != nil {

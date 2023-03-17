@@ -1,6 +1,7 @@
 package cmds
 
 import (
+	"console/biz/client/service"
 	"errors"
 	"fmt"
 	"github.com/localhostjason/webserver/db"
@@ -44,4 +45,9 @@ func AutoMigrate() (err error) {
 		return errors.New(fmt.Sprintf("failed to migrate:%v", err))
 	}
 	return db.Migrate()
+}
+
+func CreatePem() error {
+	rsa := service.NewRsa()
+	return rsa.GenRsaKey(2048)
 }

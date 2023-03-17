@@ -32,6 +32,8 @@ func (m *MainServer) Run() {
 	initDB := flag.Bool("i", false, "int db")
 	dumpConfig := flag.Bool("d", false, "dump default config")
 
+	createPem := flag.Bool("pem", false, "create pem")
+
 	// for service
 	singleMode := flag.Bool("x", false, "start, no daemon/service mode")
 	svcCMD := flag.String("k", "", "cmds:start|stop|status, windows: install|uninstall")
@@ -47,6 +49,15 @@ func (m *MainServer) Run() {
 
 	if *dumpConfig {
 		DumpDefaultConfig()
+		return
+	}
+
+	if *createPem {
+		if err := CreatePem(); err != nil {
+			fmt.Println("error create pem", err)
+			return
+		}
+		fmt.Println("success create publicKey.pem / private.pem")
 		return
 	}
 
