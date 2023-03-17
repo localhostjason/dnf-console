@@ -4,17 +4,22 @@ import (
 	gmModel "console/biz/gm/model"
 	"console/mods/game_db"
 	"crypto/md5"
-	"encoding/base64"
 	"encoding/hex"
 	"errors"
 	"fmt"
 	"gorm.io/gorm"
+	"os"
 )
 
 func ToMd5(str string) string {
 	h := md5.New()
 	h.Write([]byte(str))
 	return hex.EncodeToString(h.Sum(nil))
+}
+
+func Hex2bin(raw string) string {
+	result, _ := hex.DecodeString(raw)
+	return string(result)
 }
 
 // 10转16进制，不够补0
@@ -43,14 +48,16 @@ func Login(data *LoginReq) (string, error) {
 
 	rsa := NewRsa()
 	key := fmt.Sprintf("%s010101010101010101010101010101010101010101010101010101010101010155914510010403030101", uid16)
+	d := Hex2bin(key)
 
-	hashToken, err := RasEncrypt([]byte(key), rsa.PublicFile)
+	privateKey, _ := os.ReadFile(rsa.PrivateFile)
+	token, err := applyPriEPubD(d, string(privateKey))
 	fmt.Println("err", err)
 	if err != nil {
 		return "", err
 	}
-	fmt.Println("key:", key)
-	token := base64.StdEncoding.EncodeToString(hashToken)
+	fmt.Println("key:", d)
+	//token := base64.StdEncoding.EncodeToString(hashToken)
 	fmt.Println("token:", token)
 	return token, nil
 }
