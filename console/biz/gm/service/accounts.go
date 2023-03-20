@@ -2,8 +2,10 @@ package service
 
 import (
 	"console/biz/gm/model"
+	logModel "console/biz/log/model"
 	"console/mods/game_db"
 	"errors"
+	"github.com/gin-gonic/gin"
 	"github.com/localhostjason/webserver/server/util/uv"
 	"gorm.io/gorm"
 	"time"
@@ -89,19 +91,28 @@ func getCashByUid(uid int) (int, int) {
 1. cash_cera 充值D币
 */
 
-func RechargeAccount(uid int, data *RechargeReq) error {
+func RechargeAccount(uid int, data *RechargeReq, c *gin.Context) error {
 	dbx := game_db.DBPools.Get(model.TaiwanBilling)
+	var err error
+	action := logModel.RechargeCera
 	if data.CeraOption == "cera" {
-		err := dbx.Table("cash_cera").Where("account = ?", uid).Updates(map[string]interface{}{
+		err = dbx.Table("cash_cera").Where("account = ?", uid).Updates(map[string]interface{}{
 			"cera": data.Cera,
 		}).Error
+	} else {
+		err = dbx.Table("cash_cera_point").Where("account = ?", uid).Updates(map[string]interface{}{
+			"cera_point": data.CeraPoint,
+		}).Error
+
+		action = logModel.RechargeCeraPoint
+	}
+
+	if err != nil {
 		return err
 	}
-	errPoint := dbx.Table("cash_cera_point").Where("account = ?", uid).Updates(map[string]interface{}{
-		"cera_point": data.CeraPoint,
-	}).Error
 
-	return errPoint
+	logModel.CreateRechargeLog(uid, action, data.Number, c)
+	return nil
 }
 
 // ResetCreateCharac 重置 创建 角色

@@ -3,7 +3,7 @@
     <panel-title title="用户管理"></panel-title>
 
     <el-row>
-      <el-button type="primary" @click="createUser">创建</el-button>
+      <el-button type="primary" @click="createUser" size="small">创建</el-button>
     </el-row>
     <el-row>
       <el-table v-loading="state.loading" :data="state.data" ref="tableRef" border>
@@ -24,10 +24,17 @@
           <template #default="scope">
             <el-button type="text" @click="editUser(scope.row)">编辑</el-button>
 
-            <el-tooltip content="超级管理员不支持删除" placement="top">
-              <el-button type="text" @click="deleteUser(scope.row)" :disabled="scope.row.is_super_admin">
-                删除
-              </el-button>
+            <el-tooltip
+              content="超级管理员不支持删除"
+              effect="dark"
+              placement="top"
+              :disabled="!scope.row.is_super_admin"
+            >
+              <span style="margin-left: 10px">
+                <el-button type="text" @click="deleteUser(scope.row)" :disabled="scope.row.is_super_admin">
+                  删除
+                </el-button>
+              </span>
             </el-tooltip>
           </template>
         </el-table-column>

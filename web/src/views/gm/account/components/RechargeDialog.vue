@@ -63,12 +63,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { nextTick, reactive, ref } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
 import { AccountDetail, RechargeForm } from '@/views/gm/account/model/model'
 import { assignWith } from 'lodash'
 import { rechargeByUid } from '@/api/gm/accounts'
 import { successMessage } from '@/utils/element/message'
+import { setFormData } from '@/utils'
 
 const dialog = reactive({
   visible: false,
@@ -105,10 +106,18 @@ const rules = reactive<FormRules>({
 })
 
 const rechargeAccount = async () => {
+  let number
+  if (form.cera_option === 'cera_point') {
+    number = form.cera_point
+  } else {
+    number = form.cera
+  }
+
   const postData: RechargeForm = {
     cera_point: data.cera_point + form.cera_point,
     cera: data.cera + form.cera,
-    cera_option: form.cera_option
+    cera_option: form.cera_option,
+    number
   }
   try {
     await rechargeByUid(data.uid, postData)
@@ -123,6 +132,10 @@ const showRechargeDialog = (row: AccountDetail) => {
   data.cera_point = row.cera_point
   data.cera = row.cera
   dialog.visible = true
+
+  nextTick(() => {
+    formRef.value.resetFields()
+  })
 }
 
 // hook

@@ -212,6 +212,8 @@ github.com/localhostjason/webserver v0.0.0-20221207080821-7ee7e2c7c153 h1:SXddkC
 github.com/localhostjason/webserver v0.0.0-20221207080821-7ee7e2c7c153/go.mod h1:CVQNP06/tfGMEBjT4W8q0bkRdlZqLcoZ+4Kq7+Lfcjg=
 github.com/localhostjason/webserver v0.0.0-20230223045715-6f24e96fe0b1 h1:Ipl7xW8pPNrjLKjnFyw9hyOQvI0RSyH6yJghHUauFfA=
 github.com/localhostjason/webserver v0.0.0-20230223045715-6f24e96fe0b1/go.mod h1:DNX3Zpzn6T9qHZouGBOCFBGh5r61tNwM2FTH7I5V5zs=
+github.com/localhostjason/webserver v0.0.0-20230320063713-abd5063c312d h1:9ipyY5cB7HsIG5op/JNHCSDTVHa0PJVh5MwR2QbJzes=
+github.com/localhostjason/webserver v0.0.0-20230320063713-abd5063c312d/go.mod h1:DNX3Zpzn6T9qHZouGBOCFBGh5r61tNwM2FTH7I5V5zs=
 github.com/mattn/go-colorable v0.1.1/go.mod h1:FuOcm+DKB9mbwrcAfNl7/TZVBZ6rcnceauSikq3lYCQ=
 github.com/mattn/go-colorable v0.1.6/go.mod h1:u6P/XSegPjTcexA+o6vUJrdnUu04hMope9wVRipJSqc=
 github.com/mattn/go-isatty v0.0.5/go.mod h1:Iq45c/XA43vh69/j3iqttzPXn0bhXyGjM0Hdxcsrc5s=

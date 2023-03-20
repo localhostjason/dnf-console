@@ -8,6 +8,7 @@ import (
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 	"github.com/localhostjason/webserver/db"
+	"github.com/localhostjason/webserver/server/util/uv"
 	"gorm.io/gorm"
 	"net/http"
 	"time"
@@ -30,7 +31,10 @@ func PayloadFunc(data interface{}) jwt.MapClaims {
 
 func IdHandler(c *gin.Context) interface{} {
 	claims := jwt.ExtractClaims(c)
-	jwtKey := claims[_c.IDKey].(string)
+	jwtKey, ok := claims[_c.IDKey].(string)
+	if !ok {
+		return nil
+	}
 
 	var user = &m.User{}
 	err := db.DB.Where("jwt_key = ?", jwtKey).First(user).Error
@@ -53,6 +57,8 @@ func Authenticator(c *gin.Context) (interface{}, error) {
 
 	userName := loginValues.Username
 	password := loginValues.Password
+
+	c.Set(operateKey, uv.OP(I_OP_LOGIN, userName))
 
 	// 直接记录下来， 不管成功与否， 后面看情况使用
 	c.Set(loginFailedKey, &m.User{Username: userName})
@@ -114,17 +120,21 @@ func LoginResponse(c *gin.Context, code int, token string, expire time.Time) {
 	now := time.Now()
 	user.LastLoginTime = &now
 	db.DB.Save(user)
-
 	c.JSON(http.StatusOK, info)
 }
 
 // LogoutResponse 退出登录
 func LogoutResponse(c *gin.Context, code int) {
+	user := CurrentUser(c)
+	c.Set(operateKey, uv.OP(I_OP_LOGOUT, user.Username))
 	c.Status(201)
 }
 
 func CurrentUser(c *gin.Context) *m.User {
 	u := IdHandler(c)
-	currentUser := u.(*m.User)
+	currentUser, ok := u.(*m.User)
+	if !ok {
+		return &m.User{}
+	}
 	return currentUser
 }

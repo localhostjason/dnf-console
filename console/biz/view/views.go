@@ -3,6 +3,7 @@ package view
 import (
 	client "console/biz/client/view"
 	gm "console/biz/gm/view"
+	log "console/biz/log/view"
 	"console/biz/middleware"
 	"console/biz/static"
 	"console/biz/user"
@@ -23,6 +24,7 @@ func SetView(r *gin.Engine) error {
 	}
 
 	static.AddStaticToRouter(r)
+	r.Use(middleware.OperateHandler)
 
 	apiAuth := r.Group("api/auth")
 	api := r.Group("api")
@@ -33,13 +35,14 @@ func SetView(r *gin.Engine) error {
 	}
 
 	// load casbin
-	api.Use(middleware.CasbinHandler, middleware.ErrorHandler, middleware.OperateHandler)
+	api.Use(middleware.CasbinHandler, middleware.ErrorHandler)
 	routeGroup := ginx.NewRouterGroup(api)
 	{
 		gm.InitGmRouter(routeGroup.Group("GM管理", "gm"))
 		client.InitClientRouter(routeGroup.Group("客户端", "client"))
 
 		user.InitUserRouter(routeGroup.Group("用户管理", "user"))
+		log.InitLogRouter(routeGroup.Group("日志", "log"))
 	}
 
 	return nil

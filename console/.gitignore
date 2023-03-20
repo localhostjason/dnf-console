@@ -18,4 +18,4 @@
 
 config
 data
-log
+/log/

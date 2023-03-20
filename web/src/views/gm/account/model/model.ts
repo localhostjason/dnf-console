@@ -32,4 +32,5 @@ export type RechargeForm = {
   cera: number // d币
 
   cera_option: string
+  number?: number
 }

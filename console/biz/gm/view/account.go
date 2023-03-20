@@ -21,7 +21,7 @@ func rechargeAccount(c *gin.Context) {
 	data := &service.RechargeReq{}
 	uv.PB(c, data)
 
-	err := service.RechargeAccount(uid, data)
+	err := service.RechargeAccount(uid, data, c)
 	uv.PEIf(E_RECHARGE_POST, err)
 	c.Status(201)
 }

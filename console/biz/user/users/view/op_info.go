@@ -10,7 +10,7 @@ const (
 )
 
 var iMap = map[string]ue.Info{
-	I_OP: {Code: I_OP, Msg: "测试ID: %v, 测试名称：%v"},
+	I_OP: {Code: I_OP, Action: "测试", Msg: "测试ID: %v, 测试名称：%v"},
 }
 
 func init() {

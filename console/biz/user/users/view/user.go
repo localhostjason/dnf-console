@@ -8,7 +8,7 @@ import (
 )
 
 func getUserInfo(c *gin.Context) {
-	c.Set(operateKey, uv.OP(I_OP, "1", "hello"))
+	//c.Set(operateKey, uv.OP(I_OP, "1", "hello"))
 
 	data := service.GetUserInfo(c)
 	c.JSON(200, data)

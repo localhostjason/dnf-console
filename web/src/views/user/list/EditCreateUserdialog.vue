@@ -47,7 +47,7 @@ import { nextTick, reactive, ref } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
 
 import { validate } from '@/utils/element/form'
-import { successMessage } from '@/utils/element/message'
+import { successMessage, warnMessage } from '@/utils/element/message'
 import { ModifyUserForm, User } from '@/models/user/user'
 
 import { validateReg, setFormData, getFormDataByFields } from '@/utils'
@@ -110,6 +110,9 @@ const emit = defineEmits(['reloadUsers'])
 const updateUser = async () => {
   const valid = await validate(formRef)
   if (!valid) return
+
+  warnMessage('暂不实现！')
+  return
 
   try {
     if (user_id.value) {

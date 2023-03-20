@@ -8,7 +8,7 @@ require (
 	github.com/casbin/gorm-adapter/v3 v3.13.0
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.9.0
-	github.com/localhostjason/webserver v0.0.0-20230223045715-6f24e96fe0b1
+	github.com/localhostjason/webserver v0.0.0-20230320063713-abd5063c312d
 	github.com/satori/go.uuid v1.2.0
 	github.com/sirupsen/logrus v1.9.0
 	golang.org/x/crypto v0.5.0

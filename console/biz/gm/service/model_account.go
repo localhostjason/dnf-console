@@ -34,6 +34,7 @@ type RechargeReq struct {
 	CeraPoint  int    `json:"cera_Point"`
 	Cera       int    `json:"cera"`
 	CeraOption string `json:"cera_Option" binding:"required,oneof=cera_point cera"`
+	Number     int    `json:"number"`
 }
 
 type RoleResult struct {
