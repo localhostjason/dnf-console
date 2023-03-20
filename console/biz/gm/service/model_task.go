@@ -11,7 +11,7 @@ type TaskId struct {
 }
 
 type Email struct {
-	Code            int  `json:"code" binding:"required"`
+	Code            int  `json:"code" binding:"gte=0"`
 	Number          int  `json:"number" binding:"required"`
 	SeperateUpgrade int  `json:"seperate_upgrade"` // 武将锻造等级
 	Upgrade         int  `json:"upgrade"`          // 装备等级

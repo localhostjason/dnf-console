@@ -17,6 +17,9 @@
             <el-form-item label="修改QP" prop="qp">
               <el-input-number :min="0" v-model.number="form.qp"></el-input-number>
             </el-form-item>
+            <div style="margin-left: 100px">
+              <span class="text-warning sm">注：角色转职后，可以修改！</span>
+            </div>
           </el-form>
         </el-col>
       </el-row>
@@ -45,7 +48,7 @@ const dialog = reactive({
 })
 const formRef = ref<FormInstance>()
 const form = reactive<QpForm>({
-  qp: 500
+  qp: 800
 })
 
 const rules = reactive<FormRules>({

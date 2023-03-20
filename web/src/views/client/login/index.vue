@@ -53,6 +53,25 @@
         </fieldset>
       </el-col>
     </el-row>
+
+    <el-row style="margin-top: 30px">
+      <el-col :span="24">
+        <el-card class="box-card" shadow="hover">
+          <template #header>
+            <div class="card-header">
+              <span>注意点</span>
+            </div>
+          </template>
+          <div class="card-body">
+            <p>
+              1. 执行 "main.exe -pem" 会生成“publickey.pem”和 “private.pem” 文件，将 publickey.pem 复制到服务器 且 重启
+            </p>
+            <p>2. 点击登录，拿到hash。 在客户端目录下 运行 “dnf.exe xx” ，xx就是加密的hash</p>
+            <p>3. 最终：还是推荐使用登录器 方便。</p>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 

@@ -23,8 +23,8 @@ const ClientRoutes: Array<AppRouteRecordRaw> = [
       },
       {
         path: 'test',
-        name: 'UserTest',
-        component: () => import('@/views/user/test/index.vue'),
+        name: 'ClientTest',
+        component: () => import('@/views/test.vue'),
         meta: {
           title: '测试',
           icon: 'list'

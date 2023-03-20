@@ -34,7 +34,9 @@
           </el-form-item>
 
           <el-form-item label="金币" prop="gold">
-            <el-input v-model.number="form.gold"></el-input>
+            <el-input v-model.number="form.gold">
+              <template #append>万</template>
+            </el-input>
           </el-form-item>
 
           <el-form-item label="是否封装">
@@ -117,7 +119,7 @@ const form = reactive<Email>({
 })
 
 const rules = reactive<FormRules>({
-  code: [{ required: true, message: '请输入物品代码', trigger: 'blur' }],
+  code: [{ type: 'integer', min: 0, message: '请输入物品代码', trigger: 'blur' }],
   number: [{ required: true, message: '请输入数量', trigger: 'blur' }],
   upgrade: [{ type: 'integer', min: 0, max: 31, message: '强化/增幅等级在0至31', trigger: 'blur' }]
 })
@@ -157,8 +159,15 @@ const sendEmail = async () => {
     return
   }
 
+  if (typeof form.gold === 'string') {
+    form.gold = 0
+  }
+
+  const params = { ...form }
+  params.gold = form.gold * 10000
+
   try {
-    await sendEmailByRole(characNo.value, form)
+    await sendEmailByRole(characNo.value, params)
     successMessage('发送成功，请小退一下！')
   } catch (e) {}
 }
