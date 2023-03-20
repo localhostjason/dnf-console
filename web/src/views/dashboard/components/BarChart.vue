@@ -5,10 +5,10 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, Ref, ref } from 'vue'
+import { onMounted, Ref, ref, toRefs, watch } from 'vue'
 import { useECharts } from '@/utils/echarts/useEcharts'
 
-defineProps({
+const props = defineProps({
   width: {
     type: String as PropType<string>,
     default: '100%'
@@ -16,7 +16,18 @@ defineProps({
   height: {
     type: String as PropType<string>,
     default: '285px'
+  },
+  data: {
+    type: Object as PropType<Chart>,
+    required: true
   }
+})
+
+const { data } = toRefs(props)
+
+const newData = ref<Chart>()
+watch(data, (val: Chart) => {
+  newData.value = val
 })
 
 const chartRef = ref<HTMLDivElement | null>(null)
@@ -31,6 +42,7 @@ const getX = () => {
 }
 
 onMounted(() => {
+  console.log(111, newData)
   setOptions({
     tooltip: {
       trigger: 'axis',

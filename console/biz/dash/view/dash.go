@@ -14,3 +14,8 @@ func getDashTop5(c *gin.Context) {
 	data := service.GetRechargeTop5()
 	c.JSON(200, data)
 }
+
+func getDashChart(c *gin.Context) {
+	data := service.GetDashChart()
+	c.JSON(200, data)
+}

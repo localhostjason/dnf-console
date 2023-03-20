@@ -13,3 +13,10 @@ export const getDashTop5 = (): Promise<any> => {
     method: 'get'
   })
 }
+
+export const getDashChart = (): Promise<Chart> => {
+  return http.request({
+    url: `/dash/stat/chart`,
+    method: 'get'
+  })
+}

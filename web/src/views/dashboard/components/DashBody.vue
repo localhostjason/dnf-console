@@ -10,7 +10,7 @@
             </div>
           </template>
           <div>
-            <bar-chart></bar-chart>
+            <bar-chart :data="chartData"></bar-chart>
           </div>
         </el-card>
       </el-col>
@@ -71,8 +71,8 @@
 
 <script setup lang="ts">
 import BarChart from './BarChart'
-import { getDashTop5 } from '@/api/dash'
-import { reactive } from 'vue'
+import { getDashChart, getDashTop5 } from '@/api/dash'
+import { onBeforeMount, reactive, ref } from 'vue'
 import { formatPrice } from '@/utils'
 
 const state = reactive({
@@ -95,6 +95,23 @@ const getTop5 = async () => {
   state.cera_total = data.cera_total
   state.ccera_point_total = data.ccera_point_total
 }
+
+const chartData = ref<Chart>({
+  cera: {
+    date: [],
+    total: []
+  },
+  cera_point: {
+    date: [],
+    total: []
+  }
+})
+
+const getChartData = async () => {
+  chartData.value = await getDashChart()
+}
+
+getChartData()
 
 getTop5()
 </script>
