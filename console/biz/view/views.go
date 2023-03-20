@@ -2,6 +2,7 @@ package view
 
 import (
 	client "console/biz/client/view"
+	dash "console/biz/dash/view"
 	gm "console/biz/gm/view"
 	log "console/biz/log/view"
 	"console/biz/middleware"
@@ -43,6 +44,7 @@ func SetView(r *gin.Engine) error {
 
 		user.InitUserRouter(routeGroup.Group("用户管理", "user"))
 		log.InitLogRouter(routeGroup.Group("日志", "log"))
+		dash.InitDashRouter(routeGroup.Group("统计", "dash"))
 	}
 
 	return nil
