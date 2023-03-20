@@ -20,16 +20,16 @@
           <template #header>
             <div class="card-header">
               <svg-icon icon-class="list"></svg-icon>
-              <span style="position: relative; left: 10px">充值 Top5</span>
+              <span style="position: relative; left: 10px">充值D币 Top5</span>
             </div>
           </template>
           <div class="dash-table">
-            <el-table :data="tableData" style="width: 100%" :show-header="false" max-height="245px">
-              <el-table-column prop="name" label="名称" width="130" />
+            <el-table :data="state.cera" style="width: 100%" :show-header="false" max-height="245px" height="245px">
+              <el-table-column prop="uid" label="UID" width="130" />
               <el-table-column prop="number" label="金额">
                 <template #default="scope">
                   <el-progress :percentage="scope.row.percent">
-                    <el-button text>{{ scope.row.number }}</el-button>
+                    <el-button text>{{ formatPrice(scope.row.total) }}</el-button>
                   </el-progress>
                 </template>
               </el-table-column>
@@ -42,16 +42,22 @@
           <template #header>
             <div class="card-header">
               <svg-icon icon-class="timer"></svg-icon>
-              <span style="position: relative; left: 10px">在线Top5</span>
+              <span style="position: relative; left: 10px">充值D点 Top5</span>
             </div>
           </template>
           <div class="dash-table">
-            <el-table :data="tableData" style="width: 100%" :show-header="false" max-height="245px">
-              <el-table-column prop="name" label="名称" width="130" />
+            <el-table
+              :data="state.cera_point"
+              style="width: 100%"
+              :show-header="false"
+              max-height="245px"
+              height="245px"
+            >
+              <el-table-column prop="uid" label="UID" width="130" />
               <el-table-column prop="number" label="金额">
                 <template #default="scope">
                   <el-progress :percentage="scope.row.percent">
-                    <el-button text>{{ scope.row.number }}</el-button>
+                    <el-button text>{{ formatPrice(scope.row.total) }}</el-button>
                   </el-progress>
                 </template>
               </el-table-column>
@@ -65,34 +71,32 @@
 
 <script setup lang="ts">
 import BarChart from './BarChart'
+import { getDashTop5 } from '@/api/dash'
+import { reactive } from 'vue'
+import { formatPrice } from '@/utils'
 
-const tableData = [
-  {
-    name: 'TomAdmin',
-    percent: 80,
-    number: '12,000'
-  },
-  {
-    name: 'Test',
-    percent: 70,
-    number: '9,999'
-  },
-  {
-    name: 'Tom',
-    percent: 60,
-    number: '6,000'
-  },
-  {
-    name: 'admin',
-    percent: 50,
-    number: '3,000'
-  },
-  {
-    name: 'admin123',
-    percent: 10,
-    number: '1,000'
-  }
-]
+const state = reactive({
+  cera: [],
+  cera_point: [],
+  cera_total: 0,
+  ccera_point_total: 0
+})
+
+const getTop5 = async () => {
+  const data = await getDashTop5()
+  state.cera = data.cera.map(val => {
+    val['percent'] = (val.total / data.cera_total) * 100
+    return val
+  })
+  state.cera_point = data.cera_point.map(val => {
+    val['percent'] = (val.total / data.cera_point_total) * 100
+    return val
+  })
+  state.cera_total = data.cera_total
+  state.ccera_point_total = data.ccera_point_total
+}
+
+getTop5()
 </script>
 
 <style lang="scss" scoped>
