@@ -5,7 +5,7 @@ import (
 	"gorm.io/gorm"
 )
 
-var DBPools = new(ConnectPool)
+var DBPools = new(DBPool)
 
 func Connect() error {
 	c := getDbConfig()
@@ -48,12 +48,12 @@ func RegTables(k any, tables ...interface{}) {
 	tableModels[k] = append(tableModels[k], tables...)
 }
 
-type InitDataHandler func() error
+type InitGameDataHandler func() error
 
-var _initGameHooks []InitDataHandler
+var _initGameHooks []InitGameDataHandler
 
 // AddInitHook db连接后执行的函数， 可用于初始化数据等
-func AddInitHook(h InitDataHandler) {
+func AddInitHook(h InitGameDataHandler) {
 	_initGameHooks = append(_initGameHooks, h)
 }
 
