@@ -28,21 +28,36 @@ const { data } = toRefs(props)
 const newData = ref<Chart>()
 watch(data, (val: Chart) => {
   newData.value = val
+  setOps()
 })
 
 const chartRef = ref<HTMLDivElement | null>(null)
-const { setOptions, echarts } = useECharts(chartRef as Ref<HTMLDivElement>)
+const { setOptions, echarts, getInstance } = useECharts(chartRef as Ref<HTMLDivElement>)
 
-const getX = () => {
-  let data = []
-  for (let i = 1; i <= 12; i++) {
-    data.push(`${i}月`)
-  }
-  return data
+const loading = () => {
+  const lienEcharts = getInstance()
+  lienEcharts.showLoading({
+    text: '正在加载数据...',
+    color: '#1890FF',
+    textColor: '#000',
+    maskColor: 'rgba(255, 255, 255, 0.2)',
+    zlevel: 0
+  })
 }
 
-onMounted(() => {
-  console.log(111, newData)
+const hideLoading = () => {
+  const lienEcharts = getInstance()
+  lienEcharts.hideLoading()
+}
+
+const setOps = () => {
+  if (!newData.value) {
+    loading()
+    return
+  }
+  hideLoading()
+  const { cera, cera_point } = newData.value
+
   setOptions({
     tooltip: {
       trigger: 'axis',
@@ -61,7 +76,7 @@ onMounted(() => {
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: getX()
+      data: cera.date
     },
     yAxis: {
       type: 'value'
@@ -73,7 +88,7 @@ onMounted(() => {
         type: 'line',
         smooth: true,
         symbol: 'none',
-        data: [5, 20, 36, 10, 10, 20, 100, 80, 100, 0, 0, 100],
+        data: cera.total,
         areaStyle: {}
       },
       {
@@ -81,11 +96,15 @@ onMounted(() => {
         type: 'line',
         symbol: 'none',
         smooth: true,
-        data: [22, 10, 26, 70, 10, 30, 80, 10, 20, 100, 100, 0],
+        data: cera_point.total,
         areaStyle: {}
       }
     ]
   })
+}
+
+onMounted(() => {
+  setOps()
 })
 </script>
 
