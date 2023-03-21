@@ -3,6 +3,7 @@ module console
 go 1.19
 
 require (
+	github.com/Lyafei/go-rsa v0.0.0-20200519074919-6694e0e47bb8
 	github.com/appleboy/gin-jwt/v2 v2.9.0
 	github.com/casbin/casbin/v2 v2.57.0
 	github.com/casbin/gorm-adapter/v3 v3.13.0
@@ -12,12 +13,13 @@ require (
 	github.com/satori/go.uuid v1.2.0
 	github.com/sirupsen/logrus v1.9.0
 	golang.org/x/crypto v0.5.0
+	gorm.io/driver/mysql v1.4.7
+	gorm.io/driver/sqlite v1.4.4
 	gorm.io/gorm v1.24.5
 )
 
 require (
 	github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible // indirect
-	github.com/Lyafei/go-rsa v0.0.0-20200519074919-6694e0e47bb8 // indirect
 	github.com/bytedance/sonic v1.8.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/gin-contrib/gzip v0.0.6 // indirect
@@ -68,11 +70,8 @@ require (
 	google.golang.org/genproto v0.0.0-20230110181048-76db0878b65f // indirect
 	google.golang.org/grpc v1.53.0 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	gorm.io/driver/mysql v1.4.7 // indirect
 	gorm.io/driver/postgres v1.4.4 // indirect
-	gorm.io/driver/sqlite v1.4.4 // indirect
 	gorm.io/driver/sqlserver v1.4.1 // indirect
 	gorm.io/plugin/dbresolver v1.3.0 // indirect
 	modernc.org/libc v1.19.0 // indirect

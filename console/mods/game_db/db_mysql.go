@@ -4,6 +4,7 @@ package game_db
 import (
 	"errors"
 	"fmt"
+	log "github.com/sirupsen/logrus"
 	"sync"
 
 	"gorm.io/driver/mysql"
@@ -13,47 +14,55 @@ import (
 
 // ConnectWithMysqlConfig 连接，检验配置是否正确
 func ConnectWithMysqlConfig(cfgs []MysqlDBConfig) error {
-	var eMsg = &sync.Map{}
 	var wg = &sync.WaitGroup{}
-
 	for _, c := range cfgs {
 		wg.Add(1)
 
-		go func(c MysqlDBConfig, eMsg *sync.Map) {
+		go func(c MysqlDBConfig) {
 			defer wg.Done()
 
-			multiStatements := "false"
-			if c.MultiStatements {
-				multiStatements = "true"
-			}
-			dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?multiStatements=%s&charset=%s&parseTime=True&loc=Local&timeout=%ds&allowAllFiles=true",
-				c.User, c.Password, c.Host, c.Port, c.DB, multiStatements, c.Charset, c.Timeout)
-			db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
-				FullSaveAssociations:   true,
-				SkipDefaultTransaction: true,
-				NamingStrategy:         schema.NamingStrategy{SingularTable: true},
-			})
-
-			if c.Debug {
-				db = db.Debug()
-			}
-
+			err := connectMysqlOne(c)
 			if err != nil {
-				eMsg.Store("error", fmt.Sprintf("failed to connect databse %s:%v", dsn, err))
-				return
+				log.Fatal(err)
 			}
-
-			DBPools.Add(c.Key, db)
-		}(c, eMsg)
+		}(c)
 
 	}
-
 	wg.Wait()
 
-	err, ok := eMsg.Load("error")
-	if ok {
-		return errors.New(err.(string))
+	if err := Migrate(); err != nil {
+		return err
 	}
+
+	if err := InitData(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func connectMysqlOne(c MysqlDBConfig) error {
+	multiStatements := "false"
+	if c.MultiStatements {
+		multiStatements = "true"
+	}
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?multiStatements=%s&charset=%s&parseTime=True&loc=Local&timeout=%ds&allowAllFiles=true",
+		c.User, c.Password, c.Host, c.Port, c.DB, multiStatements, c.Charset, c.Timeout)
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+		FullSaveAssociations:   true,
+		SkipDefaultTransaction: true,
+		NamingStrategy:         schema.NamingStrategy{SingularTable: true},
+	})
+
+	if c.Debug {
+		db = db.Debug()
+	}
+
+	if err != nil {
+		return errors.New(fmt.Sprintf("failed to connect databse %s:%v", dsn, err))
+	}
+
+	DBPools.Add(c.Key, db)
 	return nil
 }
 
