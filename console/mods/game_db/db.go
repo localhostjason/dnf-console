@@ -56,15 +56,15 @@ func RegTables(k any, tables ...interface{}) {
 
 type InitDataHandler func() error
 
-var _initHooks []InitDataHandler
+var _initGameHooks []InitDataHandler
 
 // AddInitHook db连接后执行的函数， 可用于初始化数据等
 func AddInitHook(h InitDataHandler) {
-	_initHooks = append(_initHooks, h)
+	_initGameHooks = append(_initGameHooks, h)
 }
 
 func InitData() error {
-	for _, h := range _initHooks {
+	for _, h := range _initGameHooks {
 		if err := h(); err != nil {
 			return err
 		}
