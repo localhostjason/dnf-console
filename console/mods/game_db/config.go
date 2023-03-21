@@ -57,18 +57,6 @@ func init() {
 	_ = config.RegConfig(_key, c)
 }
 
-func getMysqlConfig() []MysqlDBConfig {
-	var c DbConfig
-	_ = config.GetConfig(_key, &c) // todo return error
-	return c.Mysql
-}
-
-func getSqliteConfig() []SqliteDBConfig {
-	var c DbConfig
-	_ = config.GetConfig(_key, &c) // todo return error
-	return c.Sqlite
-}
-
 func getDbConfig() DbConfig {
 	var c DbConfig
 	_ = config.GetConfig(_key, &c)
