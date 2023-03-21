@@ -1,7 +1,6 @@
 package game_db
 
 import (
-	"fmt"
 	log "github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 )
@@ -11,20 +10,15 @@ var DBPools = new(ConnectPool)
 func Connect() error {
 	c := getDbConfig()
 	if !c.Enable {
-		fmt.Println("no use db")
 		return nil
 	}
 
-	if len(c.Mysql) != 0 {
-		if err := ConnectWithMysqlConfig(c.Mysql); err != nil {
-			return err
-		}
+	if err := ConnectWithMysqlConfig(c.Mysql); err != nil {
+		return err
 	}
 
-	if len(c.Sqlite) != 0 {
-		if err := ConnectWithSqliteConfig(c.Sqlite); err != nil {
-			return err
-		}
+	if err := ConnectWithSqliteConfig(c.Sqlite); err != nil {
+		return err
 	}
 	return nil
 }

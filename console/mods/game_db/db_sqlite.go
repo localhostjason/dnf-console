@@ -15,6 +15,10 @@ import (
 
 // ConnectWithSqliteConfig 连接，检验配置是否正确
 func ConnectWithSqliteConfig(cfgs []SqliteDBConfig) error {
+	if len(cfgs) == 0 {
+		return nil
+	}
+
 	var wg = &sync.WaitGroup{}
 
 	for _, c := range cfgs {
