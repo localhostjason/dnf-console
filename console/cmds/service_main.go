@@ -1,9 +1,10 @@
 package cmds
 
 import (
+	"console/biz/view"
 	"console/mods/casbinx"
+	"console/mods/game_db"
 	"errors"
-	"github.com/gin-gonic/gin"
 	"github.com/localhostjason/webserver/db"
 	"github.com/localhostjason/webserver/server"
 	"github.com/localhostjason/webserver/svc"
@@ -13,8 +14,6 @@ import (
 
 	log "github.com/sirupsen/logrus"
 )
-
-var SetViewFunc func(r *gin.Engine) error
 
 type MainProc struct {
 	singleMode bool
@@ -54,9 +53,6 @@ func (m *MainProc) handleSigTerm(sig os.Signal) (err error) {
 func startServer(toConsole bool) (*server.Server, error) {
 
 	s, err := server.NewServer()
-	if LoadGserverApiFunc != nil {
-		s.LoadGrpcServerApi(LoadGserverApiFunc)
-	}
 	if err != nil {
 		log.Fatalln("failed to start:", err)
 	}
@@ -73,16 +69,21 @@ func startServer(toConsole bool) (*server.Server, error) {
 		log.Fatalln(err)
 	}
 
+	if err = game_db.Connect(); err != nil {
+		log.Fatalln(err)
+	}
+
+	if err = game_db.InitData(); err != nil {
+		log.Fatalln(err)
+	}
+
 	if err = casbinx.NewCasBin().Run(); err != nil {
 		log.Fatalln(err)
 	}
 
 	//s.SetRecovery(uv.DefaultRecovery(false))
-	if SetViewFunc != nil {
-		err = s.SetRouter(SetViewFunc)
-		if err != nil {
-			return nil, err
-		}
+	if err = s.SetRouter(view.SetView); err != nil {
+		return nil, err
 	}
 
 	err = s.Start()

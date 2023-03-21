@@ -139,3 +139,10 @@ main.exe -k uninstall # windows 卸妆服务
 用户名：admin
 密码：123
 
+
+
+### 打赏
+
+有木有大佬 请我喝杯咖啡
+
+![](.\wxp.png)

@@ -7,7 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/localhostjason/webserver/server"
 	"github.com/localhostjason/webserver/server/config"
-	"google.golang.org/grpc"
 )
 
 type MainWorkFunc func(r *gin.Engine) error
@@ -86,14 +85,4 @@ func (m *MainServer) Run() {
 	}
 
 	RunService(*singleMode, *svcCMD)
-}
-
-var LoadGserverApiFunc func(server *grpc.Server)
-
-func (m *MainServer) LoadGrpcServerApi(loadFunc func(*grpc.Server)) {
-	LoadGserverApiFunc = loadFunc
-}
-
-func (m *MainServer) LoadView(setView MainWorkFunc) {
-	SetViewFunc = setView
 }
