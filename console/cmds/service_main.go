@@ -62,19 +62,28 @@ func startServer(toConsole bool) (*server.Server, error) {
 		log.Fatalln("failed to set log:", err)
 	}
 
-	if err = db.Connect(); err != nil {
-		log.Fatalln(err)
-	}
-	if err = db.InitData(); err != nil {
-		log.Fatalln(err)
+	if db.DBEnable() {
+		if err = db.Connect(); err != nil {
+			log.Fatalln(err)
+		}
+		if err = db.Migrate(); err != nil {
+			log.Fatalln(err)
+		}
+		if err = db.InitData(); err != nil {
+			log.Fatalln(err)
+		}
 	}
 
-	if err = game_db.Connect(); err != nil {
-		log.Fatalln(err)
-	}
-
-	if err = game_db.InitData(); err != nil {
-		log.Fatalln(err)
+	if game_db.DBEnable() {
+		if err = game_db.Connect(); err != nil {
+			log.Fatalln(err)
+		}
+		if err = game_db.Migrate(); err != nil {
+			log.Fatalln(err)
+		}
+		if err = game_db.InitData(); err != nil {
+			log.Fatalln(err)
+		}
 	}
 
 	if err = casbinx.NewCasBin().Run(); err != nil {

@@ -50,8 +50,8 @@ func init() {
 
 func NewService(prc *MainProc) (*svc.Svc, error) {
 	if runtime.GOOS == "windows" {
-		svcName := "center2"
-		svcDescription := "center2 服务"
+		svcName := "center"
+		svcDescription := "center 服务"
 		return svc.NewSvc(svcName, svcDescription, prc), nil
 	} else {
 		c, err := getConf()
