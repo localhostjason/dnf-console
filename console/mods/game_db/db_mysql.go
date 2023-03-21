@@ -33,15 +33,6 @@ func ConnectWithMysqlConfig(cfgs []MysqlDBConfig) error {
 
 	}
 	wg.Wait()
-
-	if err := Migrate(); err != nil {
-		return err
-	}
-
-	if err := InitData(); err != nil {
-		return err
-	}
-
 	return nil
 }
 

@@ -78,6 +78,13 @@ func startServer(toConsole bool) (*server.Server, error) {
 		if err = game_db.Connect(); err != nil {
 			log.Fatalln(err)
 		}
+
+		if err = game_db.Migrate(); err != nil {
+			log.Fatalln(err)
+		}
+		if err = game_db.InitData(); err != nil {
+			log.Fatalln(err)
+		}
 	}
 
 	if err = casbinx.NewCasBin().Run(); err != nil {

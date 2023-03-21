@@ -4,10 +4,10 @@ import (
 	"errors"
 	"fmt"
 	"github.com/localhostjason/webserver/util"
+	log "github.com/sirupsen/logrus"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"log"
 	"os"
 	"path/filepath"
 	"sync"
@@ -35,15 +35,6 @@ func ConnectWithSqliteConfig(cfgs []SqliteDBConfig) error {
 	}
 
 	wg.Wait()
-
-	if err := Migrate(); err != nil {
-		return err
-	}
-
-	if err := InitData(); err != nil {
-		return err
-	}
-
 	return nil
 }
 
