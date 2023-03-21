@@ -22,7 +22,7 @@
         <el-table-column prop="desc" label="描述" />
         <el-table-column label="操作" width="160">
           <template #default="scope">
-            <el-button type="text" @click="editUser(scope.row)">编辑</el-button>
+            <el-button type="primary" text @click="editUser(scope.row)">编辑</el-button>
 
             <el-tooltip
               content="超级管理员不支持删除"
@@ -31,7 +31,7 @@
               :disabled="!scope.row.is_super_admin"
             >
               <span style="margin-left: 10px">
-                <el-button type="text" @click="deleteUser(scope.row)" :disabled="scope.row.is_super_admin">
+                <el-button type="primary" text @click="deleteUser(scope.row)" :disabled="scope.row.is_super_admin">
                   删除
                 </el-button>
               </span>
