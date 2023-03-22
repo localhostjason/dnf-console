@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/localhostjason/webserver/server"
 	"github.com/localhostjason/webserver/server/config"
+	"os"
 )
 
 type MainWorkFunc func(r *gin.Engine) error
@@ -37,7 +38,19 @@ func (m *MainServer) Run() {
 	singleMode := flag.Bool("x", false, "start, no daemon/service mode")
 	svcCMD := flag.String("k", "", "cmds:start|stop|status, windows: install|uninstall")
 
+	isRun := flag.Bool("run", false, "if set run, path use os.getWd ,else use exeDir")
+
 	flag.Parse()
+
+	if *isRun {
+		err := os.Setenv("DEBUG", "1")
+		if err != nil {
+			fmt.Println("set env DEBUG=1, err: ", err)
+			return
+		}
+		cf := server.InitDefaultServerConfigFile(m.DefaultConfigPath)
+		configPath = &cf
+	}
 
 	if err := config.SetConfigFile(*configPath); err != nil {
 		fmt.Println("failed to set config path", *configPath, err)

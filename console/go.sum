@@ -188,6 +188,8 @@ github.com/localhostjason/webserver v0.0.0-20230322030220-7afb7c326780 h1:0LKsql
 github.com/localhostjason/webserver v0.0.0-20230322030220-7afb7c326780/go.mod h1:DNX3Zpzn6T9qHZouGBOCFBGh5r61tNwM2FTH7I5V5zs=
 github.com/localhostjason/webserver v0.0.0-20230322031213-8f60770840c1 h1:14S31jOcDsh7s18bbCKbwd1PHsdj1ZipEwZPMwBQj/k=
 github.com/localhostjason/webserver v0.0.0-20230322031213-8f60770840c1/go.mod h1:DNX3Zpzn6T9qHZouGBOCFBGh5r61tNwM2FTH7I5V5zs=
+github.com/localhostjason/webserver v0.0.0-20230322064633-4ac787708364 h1:W3rrz8bfGwhLU6y6BiBpfDQgyvOSQEiC/0LMFi9Pvxg=
+github.com/localhostjason/webserver v0.0.0-20230322064633-4ac787708364/go.mod h1:DNX3Zpzn6T9qHZouGBOCFBGh5r61tNwM2FTH7I5V5zs=
 github.com/mattn/go-colorable v0.1.1/go.mod h1:FuOcm+DKB9mbwrcAfNl7/TZVBZ6rcnceauSikq3lYCQ=
 github.com/mattn/go-colorable v0.1.6/go.mod h1:u6P/XSegPjTcexA+o6vUJrdnUu04hMope9wVRipJSqc=
 github.com/mattn/go-isatty v0.0.5/go.mod h1:Iq45c/XA43vh69/j3iqttzPXn0bhXyGjM0Hdxcsrc5s=
