@@ -111,8 +111,12 @@ export default defineComponent({
         try {
           const { token } = await login(form)
           userStore.setToken(token)
-        } catch (e) {}
-        loading.value = false
+          loading.value = false
+        } catch (e) {
+          console.log(111, e)
+          loading.value = false
+          return
+        }
 
         await router.push({ path: '/' })
         ElNotification.success({

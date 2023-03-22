@@ -72,11 +72,10 @@ const httpResponseMessageByCode = (code: number, errMsg: string): string => {
 
 // 拦截器 response err
 export const httpResponseErr = async <T = never>(error: any): Promise<T> => {
-  let status = 0
   const userStore = useUserStoreWithOut()
-  try {
-    status = error.response.status
-  } catch (e) {
+  const status = error.response.status
+
+  if (!status) {
     const msg = '连接不上后台，已超时'
     errorMessage(msg)
     return Promise.reject(msg)
@@ -95,10 +94,8 @@ export const httpResponseErr = async <T = never>(error: any): Promise<T> => {
 
 // 拦截器 download response err
 export const downloadHttpResponseErr = <T = never>(error: any): Promise<T> => {
-  let status = 0
-  try {
-    status = error.response.status
-  } catch (e) {
+  const status = error.response.status
+  if (!status) {
     const msg = '连接不上后台，已超时'
     errorMessage(msg)
     return Promise.reject(msg)
