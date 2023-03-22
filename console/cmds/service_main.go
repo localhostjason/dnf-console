@@ -69,9 +69,6 @@ func startServer(toConsole bool) (*server.Server, error) {
 		if err = db.Migrate(); err != nil {
 			log.Fatalln(err)
 		}
-		if err = db.InitData(); err != nil {
-			log.Fatalln(err)
-		}
 	}
 
 	if game_db.DBEnable() {
@@ -80,9 +77,6 @@ func startServer(toConsole bool) (*server.Server, error) {
 		}
 
 		if err = game_db.Migrate(); err != nil {
-			log.Fatalln(err)
-		}
-		if err = game_db.InitData(); err != nil {
 			log.Fatalln(err)
 		}
 	}
