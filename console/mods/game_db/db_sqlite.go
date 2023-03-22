@@ -1,6 +1,7 @@
 package game_db
 
 import (
+	"console/mods/pathx"
 	"errors"
 	"fmt"
 	"github.com/localhostjason/webserver/util"
@@ -43,7 +44,7 @@ func connectSqliteOne(c SqliteDBConfig) error {
 	if filepath.IsAbs(c.DbFile) {
 		dbFile = c.DbFile
 	} else {
-		exePath, _ := os.Getwd()
+		exePath, _ := pathx.GetExeDir()
 		dbFile = filepath.Join(exePath, c.DbFile)
 	}
 

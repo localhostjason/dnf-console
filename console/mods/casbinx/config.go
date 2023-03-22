@@ -1,6 +1,7 @@
 package casbinx
 
 import (
+	"console/mods/pathx"
 	"github.com/localhostjason/webserver/server/config"
 	"os"
 	"path/filepath"
@@ -24,7 +25,7 @@ m = g(r.sub, p.sub) && keyMatch2(r.obj, p.obj) && r.act == p.act
 `
 
 func regCasbinConfig() {
-	extPath, _ := os.Getwd()
+	extPath, _ := pathx.GetExeDir()
 	file := filepath.Join(extPath, "config", "rbac_model.conf")
 
 	c := CasbinConfig{

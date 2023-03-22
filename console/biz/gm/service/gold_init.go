@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"console/biz/gm/model"
 	"console/mods/game_db"
+	"console/mods/pathx"
 	"fmt"
 	"github.com/localhostjason/webserver/util"
 	"io"
@@ -25,7 +26,7 @@ func NewGoldFile() *GoldFile {
 }
 
 func getGoldFile() string {
-	exeDir, _ := os.Getwd()
+	exeDir, _ := pathx.GetExeDir()
 	goldFile := filepath.Join(exeDir, "source", "gold.txt")
 	if !util.PathExists(goldFile) {
 		return ""

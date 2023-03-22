@@ -2,10 +2,10 @@ package view
 
 import (
 	"console/mods/ginx"
+	"console/mods/pathx"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/url"
-	"os"
 	"path/filepath"
 )
 
@@ -27,7 +27,7 @@ func InitUsersRouter(r *ginx.RouterGroup) {
 
 func loadFile(c *gin.Context) {
 	//uv.PEIf(E_USER_INFO_UPDATE, errors.New("test error"))
-	pwd, _ := os.Getwd()
+	pwd, _ := pathx.GetExeDir()
 	file := filepath.Join(pwd, "config", "rbac_model.conf")
 	output := url.QueryEscape(filepath.Base(file))
 	c.Writer.Header().Add("Content-Disposition", fmt.Sprintf("attachment; filename=%s", output))

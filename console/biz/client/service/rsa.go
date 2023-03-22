@@ -1,6 +1,7 @@
 package service
 
 import (
+	"console/mods/pathx"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
@@ -15,7 +16,7 @@ type Rsa struct {
 }
 
 func NewRsa() *Rsa {
-	exeDir, _ := os.Getwd()
+	exeDir, _ := pathx.GetExeDir()
 	publickeyFile := filepath.Join(exeDir, "source", "publickey.pem")
 	privateFile := filepath.Join(exeDir, "source", "private.pem")
 	return &Rsa{
