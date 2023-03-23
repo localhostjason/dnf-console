@@ -7,7 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/localhostjason/webserver/server"
 	"github.com/localhostjason/webserver/server/config"
-	"os"
 )
 
 type MainWorkFunc func(r *gin.Engine) error
@@ -26,9 +25,9 @@ func (m *MainServer) SetServerConfigFile(file string) {
 
 // Run 可根据自己业务 替换扩展
 func (m *MainServer) Run() {
-	defaultConfigFile := server.InitDefaultServerConfigFile(m.DefaultConfigPath)
+	setDefaultPathNoPath := server.InitDefaultServerConfigFile(m.DefaultConfigPath)
 
-	configPath := flag.String("p", defaultConfigFile, "path to config")
+	configPath := flag.String("p", setDefaultPathNoPath, "path to config")
 	initDB := flag.Bool("i", false, "int db")
 	dumpConfig := flag.Bool("d", false, "dump default config")
 
@@ -38,20 +37,7 @@ func (m *MainServer) Run() {
 	singleMode := flag.Bool("x", false, "start, no daemon/service mode")
 	svcCMD := flag.String("k", "", "cmds:start|stop|status, windows: install|uninstall")
 
-	isPwd := flag.Bool("pwd", false, "if set pwd, default config path use os.GetWd else use exePath")
-
 	flag.Parse()
-
-	// run 跑的 可以 带上 -pwd
-	if *isPwd {
-		err := os.Setenv("DEBUG", "1")
-		if err != nil {
-			fmt.Println("set env DEBUG=1, err: ", err)
-			return
-		}
-		cf := server.InitDefaultServerConfigFile(m.DefaultConfigPath)
-		configPath = &cf
-	}
 
 	if err := config.SetConfigFile(*configPath); err != nil {
 		fmt.Println("failed to set config path", *configPath, err)

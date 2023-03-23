@@ -2,30 +2,40 @@ package pathx
 
 import (
 	"os"
+	"path"
 	"path/filepath"
+	"runtime"
+	"strings"
 )
 
-func getWorkDir() (string, error) {
-	// 工作目录 类型 pwd
-	exeDir, err := os.Getwd()
-	return exeDir, err
-}
-
-// GetExeDir DEBUG=1, 将会跑 工作目录
-/*
-1. 目的：在exe（程序下）自动生成 一些目录和默认配置文件
-2. GetWd 跟 Executable ，但是 GetWd 类型于 pwd 工作目录，在go run 跑必会是 GetWd = Executable
-*/
 func GetExeDir() (string, error) {
-	// 程序目录， exe 二进制文件路径
-	ex, err := os.Executable()
+	exePath, err := os.Executable()
 	if err != nil {
 		return "", err
 	}
-	exPath := filepath.Dir(ex)
+	res := filepath.Dir(exePath)
 
-	if os.Getenv("DEBUG") != "" {
-		return getWorkDir()
+	if strings.Contains(exePath, getTmpDir()) {
+		// run 模式下，确在当前程序入口目录
+		return os.Getwd()
 	}
-	return exPath, nil
+	return res, nil
+}
+
+func getTmpDir() string {
+	dir := os.Getenv("TEMP")
+	if dir == "" {
+		dir = os.Getenv("TMP")
+	}
+	return dir
+}
+
+// 获取当前执行文件绝对路径（go run）
+func getCurrentAbPathByCaller() string {
+	var abPath string
+	_, filename, _, ok := runtime.Caller(0)
+	if ok {
+		abPath = path.Dir(filename)
+	}
+	return abPath
 }
