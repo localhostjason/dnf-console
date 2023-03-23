@@ -11,38 +11,13 @@
 3. dist
    - 最终编译程序
 
-### 运行步骤
 
-第一次运行：
-
-```shell
-main.exe -i  #初始化数据,只需要执行一次，后续只需要启停
-```
-
-
-
-后续：
-
-```shell
-main.exe -x #debug 程序跑，小白这样跑就行了
-
-#### 下面 比较复制，非小白 只需要 -x 就跑起来了
-main.exe -k install # windows 安装服务
-main.exe -k start # 启动 deamon 服务
-main.exe -k stop # 停止 deamon 服务
-main.exe -k uninstall # windows 卸妆服务
-```
-
-
-
-### 注意点：
+### 配置修改：
 
 在 `dist/config` 中`server.json` 配置项:
 
 更改 DNF 服务器 IP地址
-
-1.  如果想将 系统 部署到 DNF 服务器上。将 `host` 改为 `127.0.0.1`
-2. 如果部署到本地，将 `host` 改为 `dnf服务器IP`（允许数据库连接得上）
+- 将 `host` 改为 `dnf服务器IP`（允许数据库连接得上）
 
 
 
@@ -129,6 +104,32 @@ main.exe -k uninstall # windows 卸妆服务
   }
 }
 ```
+
+### 运行步骤
+
+第一次运行：
+
+```shell
+main.exe -i  #初始化数据,只需要执行一次，后续只需要启停
+```
+
+
+
+后续：
+
+```shell
+main.exe -x #debug 程序跑，小白这样跑就行了
+
+#### 下面 比较复制，非小白 只需要 -x 就跑起来了
+main.exe -k install # windows 安装服务
+main.exe -k start # 启动 deamon 服务
+main.exe -k stop # 停止 deamon 服务
+main.exe -k uninstall # windows 卸妆服务
+```
+
+
+
+
 
 
 
