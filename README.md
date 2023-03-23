@@ -134,6 +134,8 @@ main.exe -k uninstall # windows 卸妆服务
 
 ### 最终
 
+打开网页，访问地址： http://127.0.0.1:8088
+
 默认登录：
 
 用户名：admin
