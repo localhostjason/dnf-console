@@ -38,11 +38,12 @@ func (m *MainServer) Run() {
 	singleMode := flag.Bool("x", false, "start, no daemon/service mode")
 	svcCMD := flag.String("k", "", "cmds:start|stop|status, windows: install|uninstall")
 
-	isRun := flag.Bool("run", false, "if set run, path use os.getWd ,else use exeDir")
+	isPwd := flag.Bool("pwd", false, "if set pwd, default config path use os.GetWd else use exePath")
 
 	flag.Parse()
 
-	if *isRun {
+	// run 跑的 可以 带上 -pwd
+	if *isPwd {
 		err := os.Setenv("DEBUG", "1")
 		if err != nil {
 			fmt.Println("set env DEBUG=1, err: ", err)
