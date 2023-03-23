@@ -2,7 +2,7 @@
 
 ### 目录
 
-1.  console 
+1. console 
    - 后端源码
    - 技术栈：go+gorm+gin
 2. web
