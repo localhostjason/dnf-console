@@ -155,7 +155,7 @@ const sendEmail = async () => {
   if (!valid) return
 
   if (!characNo.value) {
-    errorMessage('未获取到角色ID')
+    errorMessage('未选择角色ID')
     return
   }
 

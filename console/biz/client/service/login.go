@@ -44,7 +44,7 @@ func Login(data *LoginReq) (string, error) {
 	}
 
 	uid16 := uidTo16(account.Uid)
-	fmt.Println("data", uid16)
+	fmt.Println("data", data.LoginType, account.Uid, uid16)
 
 	rsa := NewRsa()
 	key := fmt.Sprintf("%s010101010101010101010101010101010101010101010101010101010101010155914510010403030101", uid16)

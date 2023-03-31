@@ -46,6 +46,7 @@ const setUid = async (uid: number) => {
   try {
     state.loading = true
     state.data = await getRoles(uid)
+    emailFormRef.value.setCharacNo(null)
     state.loading = false
   } catch (e) {
     state.loading = false
