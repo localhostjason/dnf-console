@@ -7,7 +7,7 @@
         <el-form :model="form" :rules="rules" ref="formRef" label-width="120px">
           <el-form-item prop="loginType">
             <el-switch
-              v-model="form.loginType"
+              v-model="form.login_type"
               active-value="password"
               inactive-color="#36CBCB"
               inactive-value="uid"
@@ -17,7 +17,7 @@
             />
           </el-form-item>
 
-          <div v-show="form.loginType === 'password'">
+          <div v-show="form.login_type === 'password'">
             <el-form-item label="账号" prop="username">
               <el-input v-model="form.username"></el-input>
             </el-form-item>
@@ -26,8 +26,14 @@
               <el-input type="password" v-model="form.password"></el-input>
             </el-form-item>
           </div>
-          <div v-show="form.loginType === 'uid'">
-            <select-account :has-role="false" label-width="120px" :has-btn="false" @setUid="setUid"></select-account>
+          <div v-show="form.login_type === 'uid'">
+            <select-account
+              :has-role="false"
+              label-width="120px"
+              :has-btn="false"
+              @setUid="setUid"
+              enable-event-change
+            ></select-account>
           </div>
 
           <!--          <el-form-item label="RSA加密公钥:" prop="public_pem">-->
@@ -87,7 +93,7 @@ import { loginClient } from '@/api/client/login'
 const formRef = ref<FormInstance>()
 
 const form = reactive<ClientLoginForm>({
-  loginType: 'password',
+  login_type: 'password',
   uid: 18000002,
   username: 'bailbo9',
   password: '123456',
@@ -109,7 +115,7 @@ const setUid = id => {
 }
 
 const loginClientHandler = async () => {
-  if (form.loginType === 'uid') {
+  if (form.login_type === 'uid') {
     const valid = await validateField(formRef, ['public_pem', 'game_dir'])
     if (!valid) return
   } else {

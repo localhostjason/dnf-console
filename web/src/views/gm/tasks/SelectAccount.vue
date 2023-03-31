@@ -4,7 +4,7 @@
       <el-form-item label="账号ID" prop="uid">
         <el-select
           v-model="form.uid"
-          @change="selectRoles"
+          @change="changeRoles"
           filterable
           clearable
           placeholder="选择账号id"
@@ -47,6 +47,10 @@ const props = defineProps({
   labelWidth: {
     type: String,
     default: '100px'
+  },
+  enableEventChange: {
+    type: Boolean,
+    default: false
   }
 })
 const { hasRole, hasBtn, labelWidth } = toRefs(props)
@@ -69,6 +73,16 @@ const getAccountsOptions = async () => {
   loading.value = true
   options.data = await getAccounts({ has_roles: hasRole.value })
   loading.value = false
+}
+
+const changeRoles = async () => {
+  if (!props.enableEventChange) {
+    return
+  }
+
+  const valid = await validate(formRef)
+  if (!valid) return
+  emit('setUid', form.uid)
 }
 
 const selectRoles = async () => {

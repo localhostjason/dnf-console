@@ -1,7 +1,7 @@
 type LoginType = 'uid' | 'password'
 
 export type ClientLoginForm = {
-  loginType: LoginType
+  login_type: LoginType
   uid: number
   username: string
   password: string
