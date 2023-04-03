@@ -7,12 +7,14 @@ require (
 	github.com/appleboy/gin-jwt/v2 v2.9.0
 	github.com/casbin/casbin/v2 v2.57.0
 	github.com/casbin/gorm-adapter/v3 v3.13.0
+	github.com/djimenez/iconv-go v0.0.0-20160305225143-8960e66bd3da
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.9.0
 	github.com/localhostjason/webserver v0.0.0-20230323055832-ab6e3ba7e7eb
 	github.com/satori/go.uuid v1.2.0
 	github.com/sirupsen/logrus v1.9.0
 	golang.org/x/crypto v0.5.0
+	golang.org/x/text v0.7.0
 	gorm.io/driver/mysql v1.4.7
 	gorm.io/driver/sqlite v1.4.4
 	gorm.io/gorm v1.24.5
@@ -65,9 +67,7 @@ require (
 	github.com/ugorji/go/codec v1.2.9 // indirect
 	golang.org/x/arch v0.0.0-20210923205945-b76863e36670 // indirect
 	golang.org/x/net v0.7.0 // indirect
-	golang.org/x/sync v0.1.0 // indirect
 	golang.org/x/sys v0.5.0 // indirect
-	golang.org/x/text v0.7.0 // indirect
 	google.golang.org/genproto v0.0.0-20230110181048-76db0878b65f // indirect
 	google.golang.org/grpc v1.53.0 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
