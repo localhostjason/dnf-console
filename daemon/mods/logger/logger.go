@@ -34,8 +34,8 @@ func SetLogConfig(toConsole bool) error {
 	//errLog := filepath.Join(cfg.LogPath, cfg.ErrorLog)
 	syslog := filepath.Join(cfg.LogPath, cfg.SysLog)
 
-	//setSysLog(syslog, cfg.LogLevel, toConsole)
-	return setSyslogV2(syslog)
+	setSysLog(syslog, cfg.LogLevel, toConsole)
+	return nil
 }
 
 func setSyslogV2(sysLogFile string) error {

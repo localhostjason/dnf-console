@@ -40,8 +40,11 @@ func (d *DnfService) Run() error {
 	return nil
 }
 
-func (d *DnfService) Stop() {
+func (d *DnfService) StopChan() {
 	d.Quit <- true
+}
+
+func (d *DnfService) Stop() {
 	data, _ := shell.Exec(d.StopShell)
 	time.Sleep(500 * time.Millisecond)
 	log.Info(data)

@@ -19,7 +19,7 @@ type MainProc struct {
 }
 
 func (m *MainProc) Stop() {
-	m.DnfService.Stop()
+	m.DnfService.StopChan()
 	m.quit <- true
 }
 
@@ -38,6 +38,7 @@ func (m *MainProc) Run(svc *svc.Svc) {
 	}
 	m.DnfService = dnfService
 	<-m.quit
+	dnfService.Stop()
 }
 
 func (m *MainProc) SigHandlers() map[os.Signal]svc.SignalHandlerFunc {
@@ -48,7 +49,7 @@ func (m *MainProc) SigHandlers() map[os.Signal]svc.SignalHandlerFunc {
 }
 
 func (m *MainProc) handleSigTerm(sig os.Signal) (err error) {
-	m.DnfService.Stop()
+	m.DnfService.StopChan()
 	m.quit <- true
 	return errors.New("quit by signal " + sig.String())
 }
