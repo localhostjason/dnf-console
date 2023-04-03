@@ -1,4 +1,4 @@
-# Deamon
+# Daemon
 
 工具：
 将 DNF 服务器端  以 daemon（守护进行） 形式运行
