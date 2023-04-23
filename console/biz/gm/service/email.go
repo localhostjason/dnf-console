@@ -30,7 +30,7 @@ func SendEmail(characNo int, email *Email) error {
 	dbx.Table("letter").Where("charac_no = ?", characNo).Order("letter_id desc").Take(&data)
 
 	//fmt.Println(123, data.LetterId)
-	amplifyOption := 3
+	amplifyOption := 0
 	amplifyValue := 0
 	if email.IsAmplify {
 		amplifyOption = email.AmplifyOption
