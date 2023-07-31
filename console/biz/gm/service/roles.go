@@ -18,8 +18,8 @@ func GetRoles(uid int) ([]RoleResult, error) {
 	var data = make([]model.CharacInfo, 0)
 	dbx := game_db.DBPools.Get(model.TaiwanCain)
 	// 乱码 角色，每次执行一次，无所谓了不搞优化！！！
-	dbx.Exec("UPDATE charac_info SET charac_name = CONVERT(BINARY(CONVERT(charac_name USING latin1)) USING utf8);")
-
+	//dbx.Exec("UPDATE charac_info SET charac_name = CONVERT(BINARY(CONVERT(charac_name USING latin1)) USING utf8);")
+	//
 	dbx.Table("charac_info").Where("m_id = ? AND delete_flag = ?", uid, 0).Find(&data)
 
 	var result = make([]RoleResult, 0)
