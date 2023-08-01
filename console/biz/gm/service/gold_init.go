@@ -84,6 +84,7 @@ func (gf *GoldFile) WriteDB() error {
 	}
 
 	fmt.Println("start")
+	dbx.Where("1=1").Delete(&model.Gold{})
 	dbx.CreateInBatches(&data, 10000)
 	fmt.Println("stop")
 	return nil
