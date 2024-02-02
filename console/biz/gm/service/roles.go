@@ -20,7 +20,7 @@ func GetRoles(uid int) ([]RoleResult, error) {
 	// 乱码 角色，每次执行一次，无所谓了不搞优化！！！
 	//dbx.Exec("UPDATE charac_info SET charac_name = CONVERT(BINARY(CONVERT(charac_name USING latin1)) USING utf8);")
 	//
-	dbx.Debug().Table("charac_info").Select("CONVERT(charac_name USING utf8) AS converted_charac_name, m_id, charac_no, lev, create_time").Where("m_id = ? AND delete_flag = ?", uid, 0).Find(&data)
+	dbx.Debug().Table("charac_info").Select("CONVERT(BINARY(CONVERT(charac_name USING latin1)) USING utf8) AS converted_charac_name, m_id, charac_no, lev, create_time").Where("m_id = ? AND delete_flag = ?", uid, 0).Find(&data)
 	//dbx.Table("charac_info").Where("m_id = ? AND delete_flag = ?", uid, 0).Find(&data)
 
 	var result = make([]RoleResult, 0)
