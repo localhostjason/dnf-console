@@ -9,3 +9,11 @@ type CharacInfo struct {
 	Lev        int       `json:"lev"`
 	CreateTime time.Time `json:"create_time"`
 }
+
+type CharacInfoV2 struct {
+	MId                 int       `json:"m_id"`
+	CharacNo            int       `json:"charac_no"`
+	ConvertedCharacName string    `json:"converted_charac_name"`
+	Lev                 int       `json:"lev"`
+	CreateTime          time.Time `json:"create_time"`
+}

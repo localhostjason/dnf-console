@@ -15,20 +15,27 @@ func GetRoles(uid int) ([]RoleResult, error) {
 		return nil, errors.New("该账号不存在")
 	}
 
-	var data = make([]model.CharacInfo, 0)
+	var data = make([]model.CharacInfoV2, 0)
 	dbx := game_db.DBPools.Get(model.TaiwanCain)
 	// 乱码 角色，每次执行一次，无所谓了不搞优化！！！
 	//dbx.Exec("UPDATE charac_info SET charac_name = CONVERT(BINARY(CONVERT(charac_name USING latin1)) USING utf8);")
 	//
-	dbx.Table("charac_info").Where("m_id = ? AND delete_flag = ?", uid, 0).Find(&data)
+	dbx.Debug().Table("charac_info").Select("CONVERT(charac_name USING utf8) AS converted_charac_name, m_id, charac_no, lev, create_time").Where("m_id = ? AND delete_flag = ?", uid, 0).Find(&data)
+	//dbx.Table("charac_info").Where("m_id = ? AND delete_flag = ?", uid, 0).Find(&data)
 
 	var result = make([]RoleResult, 0)
 	for _, info := range data {
 		result = append(result, RoleResult{
-			CharacInfo: info,
-			Money:      getMoneyByRole(info.CharacNo),
-			QP:         getQpByRole(info.CharacNo),
-			Pvp:        getPvpByRole(info.CharacNo),
+			CharacInfo: model.CharacInfo{
+				MId:        info.MId,
+				CharacNo:   info.CharacNo,
+				CharacName: info.ConvertedCharacName,
+				Lev:        info.Lev,
+				CreateTime: info.CreateTime,
+			},
+			Money: getMoneyByRole(info.CharacNo),
+			QP:    getQpByRole(info.CharacNo),
+			Pvp:   getPvpByRole(info.CharacNo),
 		})
 	}
 
