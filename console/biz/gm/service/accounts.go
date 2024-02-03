@@ -216,8 +216,7 @@ func CreateAccount(args *CreateAccountReq) error {
 	})
 	dbBilling.Table("cash_cera_point").Create(map[string]interface{}{
 		"account":    uid,
-		"cera_point": 0,
-		"mod_tran":   0,
+		"cera_point": 50,
 		"mod_date":   nowStr,
 		"reg_date":   nowStr,
 	})
