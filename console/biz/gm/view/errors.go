@@ -21,6 +21,8 @@ const (
 	E_RECHARGE_POST = "E_RECHARGE_POST"
 
 	E_RESET_CREATE_CHARAC = "E_RESET_CREATE_CHARAC"
+
+	E_OPEN_AUCTION = "E_OPEN_AUCTION"
 )
 
 var eMap = map[string]ue.Error{
@@ -40,6 +42,8 @@ var eMap = map[string]ue.Error{
 	E_GOLD_GET:            {Code: E_GOLD_GET, Desc: "获取物品错误", Msg: "%v"},
 	E_RECHARGE_POST:       {Code: E_RECHARGE_POST, Desc: "充值错误", Msg: "%v"},
 	E_RESET_CREATE_CHARAC: {Code: E_RESET_CREATE_CHARAC, Desc: "重置创建角色错误", Msg: "%v"},
+
+	E_OPEN_AUCTION: {Code: E_OPEN_AUCTION, Desc: "开启拍卖行错误", Msg: "%v"},
 }
 
 func init() {

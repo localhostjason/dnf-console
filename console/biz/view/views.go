@@ -7,6 +7,7 @@ import (
 	log "console/biz/log/view"
 	"console/biz/middleware"
 	"console/biz/static"
+	"console/biz/test_db"
 	"console/biz/user"
 	auth "console/biz/user/auth/view"
 	"console/mods/ginx"
@@ -26,6 +27,8 @@ func SetView(r *gin.Engine) error {
 
 	static.AddStaticToRouter(r)
 	r.Use(middleware.OperateHandler)
+
+	test_db.InitTestDbRouter(r.Group("test"))
 
 	apiAuth := r.Group("api/auth")
 	api := r.Group("api")

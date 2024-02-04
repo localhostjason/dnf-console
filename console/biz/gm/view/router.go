@@ -34,4 +34,11 @@ func InitGmRouter(r *ginx.RouterGroup) {
 		gold.GET("获取物品代码", "list", getGolds)
 	}
 
+	auction := r.Group("拍卖行", "auction")
+	{
+		auction.GET("状态", "state", getAuctionSate)
+		auction.POST("开启", ":name/open", openAuctionSate)
+		auction.POST("关闭", ":name/close", closeAuction)
+	}
+
 }

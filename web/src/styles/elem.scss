@@ -114,3 +114,19 @@
 .card-body {
   font-size: 14px;
 }
+
+
+.tc-card {
+  //min-height: 350px;
+  //margin-bottom: 20px;
+
+
+  h5 {
+    margin: 0;
+  }
+
+  .el-card__header {
+    background-color: #f7f8fa;
+    padding: 14px 20px;
+  }
+}

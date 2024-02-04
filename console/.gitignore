@@ -16,6 +16,6 @@
 *.vsix
 .idea
 
-config
+
 data
 /log/

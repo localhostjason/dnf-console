@@ -49,6 +49,15 @@ const accountsRoutes: Array<AppRouteRecordRaw> = [
         }
       },
       {
+        path: 'auction',
+        name: 'GmAuction',
+        component: () => import('@/views/gm/auction/index.vue'),
+        meta: {
+          title: '拍卖行',
+          icon: 'list'
+        }
+      },
+      {
         path: 'test',
         name: 'UserTest',
         component: () => import('@/views/test.vue'),
