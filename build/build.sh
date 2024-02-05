@@ -8,10 +8,9 @@ npm run build
 rm -rf ../dist/web/static/*
 cp -r dist/*  ../dist/web/static
 
-
 cd ../console
 
-go build main
-cp|yes main ../dist
+go build main.go
+yes | cp main ../dist
 
 cd ../build
